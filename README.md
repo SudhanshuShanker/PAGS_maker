@@ -61,7 +61,7 @@ Format:
 	.
 	.
 	
-![MaSIF banner and concept](https://raw.githubusercontent.com/SudhanshuShanker/PAGS_maker/Extra/figures/QM_dir_view.png)
+![QM Output File Arrangement](https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png)
 	
 	
 **1st line**: "completed" or "submit" shows calculation status.  

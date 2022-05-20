@@ -12,6 +12,9 @@ STEPS TO RUN PAGSMAKER PIPELINE
 	   [follow the extra/linkage_grammer_file.dat]  
 *  modify "for molecular maker" block in settings.py for the list path (model_name_list) and  pdb_out_dir if rquired.  
 * run molecule_maker.py (./molecule_maker.py)  
+``` sh
+	>> ./molecule_maker.py
+```
 	This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
 	
 	

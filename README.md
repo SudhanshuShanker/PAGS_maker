@@ -43,6 +43,7 @@ and output_files named as *global_settings.QM_out_dir_file_name* (settings.py). 
 <!-- ![QM Output File Arrangement](https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png)	 -->
 
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png" alt="QM Output File Arrangement" width="350"/>
+
 $~$
 
 **Step3: Extract QM energy for each structure**

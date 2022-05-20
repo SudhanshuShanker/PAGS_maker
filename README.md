@@ -67,7 +67,7 @@ Format:
 
 $~$
 
-**Step4: Generate_energy histograms for \phi, \psi and omega.**
+**Step4: Generate_energy histograms for $\phi$, $\psi$ and $\omega$.**
 *  Modify settings.py "#For making Histogram Files in kcal/mol" block, if needed.  
 *  Run "runconfig_to_phi_psi_histogram.py"  
 ``` sh

@@ -1,0 +1,27 @@
+HETATM    1  C2  FUR A   1     -21.048  26.222  46.251  1.00  0.00           C
+HETATM    2  H21 FUR A   1     -22.139  26.344  46.339  1.00  0.00           H
+HETATM    3  C3  FUR A   1     -20.361  27.558  45.944  1.00  0.00           C
+HETATM    4  C4  FUR A   1     -20.329  28.222  47.341  1.00  0.00           C
+HETATM    5  C5  FUR A   1     -20.110  27.022  48.296  1.00  0.00           C
+HETATM    6  O5  FUR A   1     -20.473  25.807  47.535  1.00  0.00           O
+HETATM    7  H22 FUR A   1     -20.833  25.428  45.533  1.00  0.00           H
+HETATM    8  H31 FUR A   1     -19.344  27.382  45.576  1.00  0.00           H
+HETATM    9  H32 FUR A   1     -20.898  28.157  45.201  1.00  0.00           H
+HETATM   10  H42 FUR A   1     -19.543  28.978  47.434  1.00  0.00           H
+HETATM   11  H41 FUR A   1     -21.289  28.710  47.548  1.00  0.00           H
+HETATM   12  H52 FUR A   1     -20.733  27.082  49.195  1.00  0.00           H
+HETATM   13  H51 FUR A   1     -19.064  26.913  48.597  1.00  0.00           H
+CONECT    1    7    3    6    2
+CONECT    3    4    1    9    8
+CONECT    4    5    3   10   11
+CONECT    5    6    4   12   13
+CONECT    2    1
+CONECT    7    1
+CONECT    8    3
+CONECT    9    3
+CONECT   11    4
+CONECT   10    4
+CONECT   13    5
+CONECT   12    5
+CONECT    6    5    1
+END

@@ -1,0 +1,7 @@
+# PAGS Parameters for linkID FNA2toFNA3W0_phi
+FUNCTION  GAUSSIAN
+LINKID s?5nA3_s?5nA2_0_PHI
+a     6.600016      6.979097      3.821354      9.828471      # magnitudes of the distributions
+b    -1.882325e2    3.191396e1   -1.280898e2    1.315602e2    # midpoints of the distributions
+c     2.168577e3    3.600000e3    9.139045e2    3.600000e3    # twice the squares of the widths of the distributions
+d    -0.4806548   # intercept (coefficient of zeroth order term)

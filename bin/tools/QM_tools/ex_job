@@ -1,0 +1,9 @@
+Universe = vanilla
+GetEnv = True
+Executable = /home/sshanke3/bin/orca_4_2_0_linux_x86-64_openmpi314/ssopt
+Arguments = REPLACE 
+Output = output/condor.out_$(Process)
+Log = output/condor.log_$(Process)
+Error = output/condor.err_$(Process)
+Queue 1
+

@@ -32,14 +32,7 @@ I used condor for the calculation (see bin/tools/QM_tools file for all raw files
 You can use your schedular and make directories like *global_settings.QM_out_dir_ends_with* (settings.py), 
 and output_files named as *global_settings.QM_out_dir_file_name* (settings.py). It looks like:
 	
-#	ensemble_0_0.inp                       <-- Input INP file for ORCA
-#	ensemble_0_0.inp_output/               <-- Output Directory
-#	ensemble_0_0.inp_output/condor.out_0   <-- Score file in Output Directory
-#	ensemble_0_45.inp                       <-- Input INP file for ORCA
-#	ensemble_0_45.inp_output/               <-- Output Directory
-#	ensemble_0_45.inp_output/condor.out_0   <-- Score file in Output Directory
-#	.
-#	.
+
 ![QM Output File Arrangement](https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png)	
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png" alt="drawing" width="200"/>
 $~$

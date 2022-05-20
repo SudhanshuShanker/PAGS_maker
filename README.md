@@ -121,7 +121,7 @@ Now running the same command will take a few seconds:
 >> ../../gaussian_fitter_independent.py FNA2toFNA3W0_phi.exphist 4 
 ```
 ***For the given example, best fitting can be obtained for g=7 and calculation number 1,3,4 or 5.*  
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/gaus_fit_7.png" alt="drawing" width="350"/>
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/gaus_fit_7.png" alt="drawing" width="500"/>
 
 Generated PAGS file looks like: (for g=4)
 	

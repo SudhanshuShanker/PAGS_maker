@@ -5,7 +5,7 @@ Steps To Run PAGS-Maker Pipeline
 
 *After each step, analyze output files carefully*  
 
-Edit the settings.py file for ORCA and AMBERHOME and other IO settings.  
+Edit the *settings.py* file for ORCA and AMBERHOME and other IO settings.  
 $~$
 
 **Step1: Make a simplified PDB file for a linkage**
@@ -18,7 +18,7 @@ $~$
 ```
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
 	
-	
+$~$
 **Step2: Generate a rotational ensemble and QM input files**  
 *  Modify settings.py in "for ensemble making and input file generation" block.  
 *  run make_ensemble_and_qm_inputs.py  
@@ -40,6 +40,7 @@ and output_files named as *global_settings.QM_out_dir_file_name* (settings.py). 
 	.
 	.
 	
+$~$
 **Step3: Extract QM energy for each structure**
 *  Run "QM_energy extractor.py". This program will read QM energy values from score files and write final values in
 "*.runconfig" files in *global_settings.output_ensemble_dir* (settings.py).  
@@ -62,7 +63,7 @@ Format:
 **2nd line**: Project directory name.  
 **Next lines**:  "PHI  PSI   ENEGRY(in Hartree)"  
 
-	
+$~$
 **Step4: Generate_energy histograms for phi, psi and omega.**
 *  Modify settings.py "#For making Histogram Files in kcal/mol" block, if needed.  
 *  Run "runconfig_to_phi_psi_histogram.py"  
@@ -73,7 +74,7 @@ Format:
 *  It will generate histogram files in global_settings.QM_histogram_file_out_dir
 CHEKC fFOR OMEGA
 
-
+$~$
 **Step5: Make independent PAGS files**  
 Use *gaussian_fitter_independent.py*   
 *This program uses sklearn to fit gaussian expansion terms with the histogram data*  
@@ -121,8 +122,8 @@ Generated PAGS file looks like: (for g=4)
 	c     2.168577e3    3.600000e3    9.139045e2    3.600000e3    # twice the squares of the widths of the distributions
 	d    -0.4806548   # intercept (coefficient of zeroth order term)
 
-
-Step7: Clustering potential functions
+$~$
+**Step7: Cluster similar potential functions**
 
 
 	

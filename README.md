@@ -61,13 +61,13 @@ Format:
 	.
 	.
 	
-**1st line**: Completed or submit shows calculation status.  
+**1st line**: "completed" or "submit" shows calculation status.  
 **2nd line**: Project directory name.  
 **Next lines**:  "PHI  PSI   ENEGRY(in Hartree)"  
 
 $~$
 
-**Step4: Generate_energy histograms for phi, psi and omega.**
+**Step4: Generate_energy histograms for \phi, \psi and omega.**
 *  Modify settings.py "#For making Histogram Files in kcal/mol" block, if needed.  
 *  Run "runconfig_to_phi_psi_histogram.py"  
 ``` sh

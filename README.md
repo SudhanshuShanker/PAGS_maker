@@ -33,9 +33,9 @@ You can use your schedular and make directories like *global_settings.QM_out_dir
 and output_files named as *global_settings.QM_out_dir_file_name* (settings.py). It looks like:
 	
 
-![QM Output File Arrangement](https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png)	
+<> ![QM Output File Arrangement](https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png)	
 
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png" alt="drawing" width="200"/>
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png" alt="QM Output File Arrangement" width="200"/>
 
 $~$
 

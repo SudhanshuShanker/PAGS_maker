@@ -96,21 +96,22 @@ Identify the best fitting and enter the best calculation figure number to genera
 
 *  In the case of bad fitting try different higher number for gaussian expansion equations (like, 5,6,7..).  
 
-_Note:  It may take minutes for gaussian terms more than 6._
+_Note:  It may take minutes for gaussian terms more than 6.  
 
-To save time and try all parameters, run this code in silent mode for different gaussian equation numbers, like:
+To save time and try many parameters, run this code in silent mode for using diffent gaussian expansion terms, like:
+```sh
 >> for i in 3 4 5 6 7; do ../../gaussian_fitter_independent FNA2toFNA3W0_phi.exphist $i 0; done
+```
 
-This step will perform all calculations for given series of gaussian equation numbers and generate useful parameters in 
-.data_parameters directory for next faster access.
+This step will perform all calculations for given series of gaussian expansion numbers and generate required parameters in _.data_parameters directory_ for next faster access. So you do not need to spend time for running same calculations twice.  
 
-now running 
+Now running the same command will take a few seconds:
+```sh
 >> ../../gaussian_fitter_independent.py FNA2toFNA3W0_phi.exphist 4 
-command will take few seconds to show all calculations.
+```
+***For the given example, best fitting can be obtained for g=7 and calculation number 1,3,4 or 5.*  
 
-for the given example, best fitting is obtained for g=7 and 1,3,4 or 5.
-
-generated parameter looks like:
+Generated PAGS file looks like: (for g=4)
 	
 	FUNCTION  GAUSSIAN
 	LINKID s?5nA3_s?5nA2_0_PHI

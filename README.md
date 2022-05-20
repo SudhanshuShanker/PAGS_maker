@@ -57,9 +57,9 @@ Format:
 	.
 	.
 	
-1st line : completed or submit shows calculation status.__
-2nd line is project directory name.  
-Next lines:  "PHI  PSI   ENEGRY(in Hartree)"
+**1st line**: Completed or submit shows calculation status.  
+**2nd line**: Project directory name.  
+**Next lines**:  "PHI  PSI   ENEGRY(in Hartree)"  
 
 	
 Step5: Generate_energy histograms for phi, psi and omega.

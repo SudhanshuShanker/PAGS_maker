@@ -5,9 +5,9 @@ STEPS TO RUN PAGSMAKER PIPELINE
 
 *After each step, analyze output files carefully*  
 
-**Step1**: edit the settings.py file for ORCA and AMBERHOME
+Edit the settings.py file for ORCA and AMBERHOME and other IO settings.
 
-**Step2**: To make a simplified pdb file for a linkage:  
+**Step1: Make a simplified PDB file for a linkage**  
 *  Make a list file with linkage names (like ./bin/model_lists/list_example) 
 	   [follow the extra/linkage_grammer_file.dat]  
 *  Modify "for molecular maker" block in settings.py for the list path (model_name_list) and  pdb_out_dir if rquired.  
@@ -18,7 +18,7 @@ STEPS TO RUN PAGSMAKER PIPELINE
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
 	
 	
-**Step3**: To generate rotational ensemble and QM input files:  
+**Step2: Generate a rotational ensemble and QM input files**  
 *  Modify settings.py in "#for ensemble making and input file generation" block.  
 *  run make_ensemble_and_qm_inputs.py  
 ``` sh
@@ -40,12 +40,10 @@ looks like:
 	.
 	.
 	
-**Step4**: QM energy extraction for each structure.
-	a: run "QM_energy extractor.py"
-	this program will read QM energy values from score files and write final values in
-	"*.runconfig" files in global_settings.output_ensemble_dir (settings.py)
-	The format is simple so you can use any other QM/DFT approach to generate similar runconfig files.
-	format:
+**Step3: Extract QM energy for each structure**
+*  run "QM_energy extractor.py". This program will read QM energy values from score files and write final values in
+	"*.runconfig" files in global_settings.output_ensemble_dir (settings.py).__
+The format is simple so you can use any other QM/DFT approach to generate similar runconfig files. Format:
 	
 	completed
 	project_8000

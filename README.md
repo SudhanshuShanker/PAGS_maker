@@ -5,9 +5,9 @@ STEPS TO RUN PAGSMAKER PIPELINE
 
 *After each step, analyze output files carefully*  
 
-Step1: edit the settings.py file for ORCA and AMBERHOME
+**Step1**: edit the settings.py file for ORCA and AMBERHOME
 
-Step2: To make a simplified pdb file for a linkage:
+**Step2**: To make a simplified pdb file for a linkage:  
 	a: Make a list file with linkage names (like ./bin/model_lists/list_example) 
 	   [follow the extra/linkage_grammer_file.dat]  
 	b: modify "for molecular maker" block in settings.py for the list path (model_name_list) and  pdb_out_dir if rquired.  

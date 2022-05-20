@@ -62,11 +62,15 @@ Format:
 **Next lines**:  "PHI  PSI   ENEGRY(in Hartree)"  
 
 	
-Step5: Generate_energy histograms for phi, psi and omega.
-	a: modify settings.py "#For making Histogram Files in kcal/mol" block, if needed.
-	b: run "runconfig_to_phi_psi_histogram.py"	
-	It will generate histogram files in global_settings.QM_histogram_file_out_dir
-	CHEKC fFOR OMEGA
+**Step4: Generate_energy histograms for phi, psi and omega.**
+*  Modify settings.py "#For making Histogram Files in kcal/mol" block, if needed.  
+*  Run "runconfig_to_phi_psi_histogram.py"  
+``` sh
+>> ./runconfig_to_phi_psi_histogram.py
+```
+
+*  It will generate histogram files in global_settings.QM_histogram_file_out_dir
+CHEKC fFOR OMEGA
 
 
 Step6: Making independent potential functions

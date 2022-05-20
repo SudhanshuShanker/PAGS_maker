@@ -40,7 +40,7 @@ looks like:
 	.
 	.
 	
-Step4: QM energy extraction for each structure.
+**Step4**: QM energy extraction for each structure.
 	a: run "QM_energy extractor.py"
 	this program will read QM energy values from score files and write final values in
 	"*.runconfig" files in global_settings.output_ensemble_dir (settings.py)
@@ -58,9 +58,9 @@ Step4: QM energy extraction for each structure.
 	.
 	.
 	
-first line : completed or submit shows calculation status
-2nd line : project directory names
-Next lines:  <PHI>  <PSI>   <ENEGRY IN Hartree>
+1st line : completed or submit shows calculation status.__
+2nd line is project directory name.  
+Next lines:  "<PHI>  <PSI>   <ENEGRY IN Hartree>__"
 
 	
 Step5: Generate_energy histograms for phi, psi and omega.

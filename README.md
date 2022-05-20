@@ -28,8 +28,7 @@ Use input files generated in *global_settings.output_ensemble_dir/project_****/Q
 I used condor for the calculation (see bin/tools/QM_tools file for all raw files).  
 
 You can use your schedular and make directories like *global_settings.QM_out_dir_ends_with* (settings.py), 
-and output_files named as *global_settings.QM_out_dir_file_name* (settings.py).
-looks like:
+and output_files named as *global_settings.QM_out_dir_file_name* (settings.py). It looks like:
 	
 	ensemble_0_0.inp                       <-- Input INP file for ORCA
 	ensemble_0_0.inp_output/               <-- Output Directory
@@ -42,8 +41,10 @@ looks like:
 	
 **Step3: Extract QM energy for each structure**
 *  Run "QM_energy extractor.py". This program will read QM energy values from score files and write final values in
-	"*.runconfig" files in *global_settings.output_ensemble_dir* (settings.py).  
-The format is simple, any other QM/DFT approach can be used to generate similar runconfig files. Format:
+"*.runconfig" files in *global_settings.output_ensemble_dir* (settings.py).  
+The format is simple, any other QM/DFT approach can be used to generate similar runconfig files.  
+
+Format:  
 	
 	completed
 	project_8000

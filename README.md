@@ -1,4 +1,4 @@
-STEPS TO RUN PAGSMAKER PIPELINE
+Steps To Run PAGS-Maker Pipeline
 ===============================
 
 **Requirements**: AMBERTOOLS, ORCA, Python3
@@ -73,38 +73,42 @@ Format:
 CHEKC fFOR OMEGA
 
 
-Step6: Making independent potential functions
-	Application: gaussian_fitter_independent.py
-	Note: This is done using sklearn fit for multiple gaussian expansion terms.
-	For very rouge energy surface, you may need to modify bound parameters in gaussian_fitter_independent.py.
-	To RUN:
-	a): go to global_settings.QM_histogram_file_out_dir and run
-	>> ../../gaussian_fitter_independent.py <exphist file>  <number of gaussian terms> <1: (default) for plot 0: for silent>
-	eg:
-	>> ../../gaussian_fitter_independent.py FNA2toFNA3W0_phi.exphist 4 
-	
-	This code will try to fit the gaussian expansion equation with the histogram parameters. It will show multiple GNU-plot windows with calculation number in the title, and will ask for a selection:
-	>> Input selection number: (0 [default] for no selection) 
+**Step5: Make independent PAGS files**  
+Use *gaussian_fitter_independent.py*   
+*This program uses sklearn to fit gaussian expansion terms with the histogram data*  
+For very rouge energy surface, you may need to modify bound parameters in gaussian_fitter_independent.py.
 
-	Identify the best fitting and enter the best calculation figure number to generate parameters in ./params directory.
-	
-	b: in case of bad fitting try different number for gaussian expansion equations (like, 5,6,7..)
-	
-	Note:  It may take minutes for gaussian terms more than 6.
-	
-	To save time and try all parameters, run this code in silent mode for different gaussian equation numbers, like:
-	>> for i in 3 4 5 6 7; do ../../gaussian_fitter_independent FNA2toFNA3W0_phi.exphist $i 0; done
-	
-	This step will perform all calculations for given series of gaussian equation numbers and generate useful parameters in 
-	.data_parameters directory for next faster access.
-	
-	now running 
-	>> ../../gaussian_fitter_independent.py FNA2toFNA3W0_phi.exphist 4 
-	command will take few seconds to show all calculations.
-	
-	for the given example, best fitting is obtained for g=7 and 1,3,4 or 5.
-	
-	generated parameter looks like:
+a): Go to *global_settings.QM_histogram_file_out_dir* (output histogram files)and run:  
+``` sh
+>> ../../gaussian_fitter_independent.py <exphist file>  <number of gaussian terms> <1: (default) for plot 0: for silent>
+``` 
+eg:  
+``` sh
+>> ../../gaussian_fitter_independent.py FNA2toFNA3W0_phi.exphist 4 
+``` 
+
+This code will try to fit the gaussian expansion equation with the histogram parameters. It will show multiple GNU-plot windows with calculation number in the title, and will ask for a selection:
+>> Input selection number: (0 [default] for no selection) 
+
+Identify the best fitting and enter the best calculation figure number to generate parameters in ./params directory.
+
+b: in case of bad fitting try different number for gaussian expansion equations (like, 5,6,7..)
+
+Note:  It may take minutes for gaussian terms more than 6.
+
+To save time and try all parameters, run this code in silent mode for different gaussian equation numbers, like:
+>> for i in 3 4 5 6 7; do ../../gaussian_fitter_independent FNA2toFNA3W0_phi.exphist $i 0; done
+
+This step will perform all calculations for given series of gaussian equation numbers and generate useful parameters in 
+.data_parameters directory for next faster access.
+
+now running 
+>> ../../gaussian_fitter_independent.py FNA2toFNA3W0_phi.exphist 4 
+command will take few seconds to show all calculations.
+
+for the given example, best fitting is obtained for g=7 and 1,3,4 or 5.
+
+generated parameter looks like:
 	
 	FUNCTION  GAUSSIAN
 	LINKID s?5nA3_s?5nA2_0_PHI

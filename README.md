@@ -60,7 +60,7 @@ looks like:
 	
 1st line : completed or submit shows calculation status.__
 2nd line is project directory name.  
-Next lines:  "<PHI>  <PSI>   <ENEGRY IN Hartree>__"
+Next lines:  "PHI  PSI   ENEGRY(in Hartree)"
 
 	
 Step5: Generate_energy histograms for phi, psi and omega.

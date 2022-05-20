@@ -61,9 +61,12 @@ Format:
 	.
 	.
 	
+![MaSIF banner and concept](https://raw.githubusercontent.com/SudhanshuShanker/PAGS_maker/Extra/figures/QM_dir_view.png)
+	
+	
 **1st line**: "completed" or "submit" shows calculation status.  
 **2nd line**: Project directory name.  
-**Next lines**:  Diheral:$\phi$($^o$)    Diheral:$\psi$($^o$)    Energy(in Hartree)  
+**Next lines**:  Diheral:$\phi$($^o$),    Diheral:$\psi$($^o$),    Energy(in Hartree)  
 
 $~$
 
@@ -128,7 +131,7 @@ Generated PAGS file looks like: (for g=4)
 
 $~$
 
-**Step7: Cluster similar potential functions**
+**Step6: Cluster similar potential functions**
 
 
 	

@@ -18,14 +18,17 @@ STEPS TO RUN PAGSMAKER PIPELINE
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
 	
 	
-**Step3**: To generate rotational ensemble and QM input files:
-	a: modify settings.py in "#for ensemble making and input file generation" block.
-	b: run make_ensemble_and_qm_inputs.py
-	use input files generated in global_settings.output_ensemble_dir/project_****/QM_inps for QM calculation using orca.
-	I used condor for the calculation (see bin/tools/QM_tools file for all raw files)
-	You can use your schedular and make directories like global_settings.QM_out_dir_ends_with (settings.py)
-	and output_files with same names as global_settings.QM_out_dir_file_name (settings.py)
-	looks like:
+**Step3**: To generate rotational ensemble and QM input files:  
+*  Modify settings.py in "#for ensemble making and input file generation" block.  
+*  run make_ensemble_and_qm_inputs.py  
+``` sh
+>> ./make_ensemble_and_qm_inputs.py
+```
+use input files generated in global_settings.output_ensemble_dir/project_****/QM_inps for QM calculation using ORCA.  
+I used condor for the calculation (see bin/tools/QM_tools file for all raw files)
+You can use your schedular and make directories like global_settings.QM_out_dir_ends_with (settings.py)
+and output_files with same names as global_settings.QM_out_dir_file_name (settings.py)
+looks like:
 	
 	ensemble_0_0.inp                       <-- Input INP file for ORCA
 	ensemble_0_0.inp_output/               <-- Output Directory

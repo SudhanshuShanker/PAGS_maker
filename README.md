@@ -76,25 +76,27 @@ CHEKC fFOR OMEGA
 **Step5: Make independent PAGS files**  
 Use *gaussian_fitter_independent.py*   
 *This program uses sklearn to fit gaussian expansion terms with the histogram data*  
-For very rouge energy surface, you may need to modify bound parameters in gaussian_fitter_independent.py.
+For very rouge energy surface, you may need to modify _bound parameters_ in gaussian_fitter_independent.py.
 
-a): Go to *global_settings.QM_histogram_file_out_dir* (output histogram files)and run:  
+*  Go to *global_settings.QM_histogram_file_out_dir* (output histogram files)and run:  
 ``` sh
->> ../../gaussian_fitter_independent.py <exphist file>  <number of gaussian terms> <1: (default) for plot 0: for silent>
+>> ../../gaussian_fitter_independent.py <exphist file>  <number of gaussian terms> <1:for plot (default), 0: for silent>
 ``` 
 eg:  
 ``` sh
 >> ../../gaussian_fitter_independent.py FNA2toFNA3W0_phi.exphist 4 
 ``` 
 
-This code will try to fit the gaussian expansion equation with the histogram parameters. It will show multiple GNU-plot windows with calculation number in the title, and will ask for a selection:
+This code will try to fit the gaussian expansion equations with the histogram parameters. It will output multiple (default 6) GNU-plot windows with the calculation number in the title, and will ask for a selection:
+``` sh
 >> Input selection number: (0 [default] for no selection) 
+```
 
 Identify the best fitting and enter the best calculation figure number to generate parameters in ./params directory.
 
-b: in case of bad fitting try different number for gaussian expansion equations (like, 5,6,7..)
+*  In the case of bad fitting try different higher number for gaussian expansion equations (like, 5,6,7..).  
 
-Note:  It may take minutes for gaussian terms more than 6.
+_Note:  It may take minutes for gaussian terms more than 6._
 
 To save time and try all parameters, run this code in silent mode for different gaussian equation numbers, like:
 >> for i in 3 4 5 6 7; do ../../gaussian_fitter_independent FNA2toFNA3W0_phi.exphist $i 0; done

@@ -19,12 +19,12 @@ This step will generate a simplified pdb molecule in global_settings.simplified_
 	
 	
 **Step2: Generate a rotational ensemble and QM input files**  
-*  Modify settings.py in "#for ensemble making and input file generation" block.  
+*  Modify settings.py in "for ensemble making and input file generation" block.  
 *  run make_ensemble_and_qm_inputs.py  
 ``` sh
 >> ./make_ensemble_and_qm_inputs.py
 ```
-Use input files generated in global_settings.output_ensemble_dir/project_****/QM_inps for QM calculation (ORCA.)
+Use input files generated in *global_settings.output_ensemble_dir/project_****/QM_inps* for QM calculation (ORCA.)
 I used condor for the calculation (see bin/tools/QM_tools file for all raw files).  
 
 You can use your schedular and make directories like *global_settings.QM_out_dir_ends_with* (settings.py), 
@@ -41,9 +41,9 @@ looks like:
 	.
 	
 **Step3: Extract QM energy for each structure**
-*  run "QM_energy extractor.py". This program will read QM energy values from score files and write final values in
-	"*.runconfig" files in global_settings.output_ensemble_dir (settings.py).__
-The format is simple so you can use any other QM/DFT approach to generate similar runconfig files. Format:
+*  Run "QM_energy extractor.py". This program will read QM energy values from score files and write final values in
+	"*.runconfig" files in *global_settings.output_ensemble_dir* (settings.py).  
+The format is simple, any other QM/DFT approach can be used to generate similar runconfig files. Format:
 	
 	completed
 	project_8000

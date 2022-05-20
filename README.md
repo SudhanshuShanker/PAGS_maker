@@ -5,7 +5,8 @@ Steps To Run PAGS-Maker Pipeline
 
 *After each step, analyze output files carefully*  
 
-Edit the settings.py file for ORCA and AMBERHOME and other IO settings.
+Edit the settings.py file for ORCA and AMBERHOME and other IO settings.  
+$~$
 
 **Step1: Make a simplified PDB file for a linkage**
 *  Make a list file with linkage names (like ./bin/model_lists/list_example) 

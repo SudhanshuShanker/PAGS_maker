@@ -1,5 +1,5 @@
-STEPS TO RUN PAGSMAKER PIPELINE:
-Requirements: AMBERTOOLS, ORCA, Python3
+**STEPS TO RUN PAGSMAKER PIPELINE**
+**Requirements**: AMBERTOOLS, ORCA, Python3
 
 After each step, analyze output files carefully**
 

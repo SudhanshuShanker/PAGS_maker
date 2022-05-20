@@ -1,4 +1,5 @@
-**STEPS TO RUN PAGSMAKER PIPELINE**
+STEPS TO RUN PAGSMAKER PIPELINE
+===============================
 
 **Requirements**: AMBERTOOLS, ORCA, Python3
 
@@ -11,7 +12,6 @@ Step2: To make a simplified pdb file for a linkage:
 	   [follow the extra/linkage_grammer_file.dat]
 	b: modify "for molecular maker" block in settings.py for the list path (model_name_list) and  pdb_out_dir if rquired.
 	c: run molecule_maker.py (./molecule_maker.py)
-	
 	This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)
 	
 	
@@ -22,8 +22,8 @@ Step3: To generate rotational ensemble and QM input files:
 	I used condor for the calculation (see bin/tools/QM_tools file for all raw files)
 	You can use your schedular and make directories like global_settings.QM_out_dir_ends_with (settings.py)
 	and output_files with same names as global_settings.QM_out_dir_file_name (settings.py)
-	
 	looks like:
+	
 	ensemble_0_0.inp                       <-- Input INP file for ORCA
 	ensemble_0_0.inp_output/               <-- Output Directory
 	ensemble_0_0.inp_output/condor.out_0   <-- Score file in Output Directory
@@ -38,9 +38,8 @@ Step4: QM energy extraction for each structure.
 	this program will read QM energy values from score files and write final values in
 	"*.runconfig" files in global_settings.output_ensemble_dir (settings.py)
 	The format is simple so you can use any other QM/DFT approach to generate similar runconfig files.
-	
 	format:
-	"
+	
 	completed
 	project_8000
 	180 180      -538.421270588952
@@ -51,16 +50,15 @@ Step4: QM energy extraction for each structure.
 	240 180      -538.432283903238
 	.
 	.
-	"
-	first line : completed or submit shows calculation status
-	2nd line : project directory names
-	Next lines:  <PHI>  <PSI>   <ENEGRY IN Hartree>
+	
+first line : completed or submit shows calculation status
+2nd line : project directory names
+Next lines:  <PHI>  <PSI>   <ENEGRY IN Hartree>
 
 	
 Step5: Generate_energy histograms for phi, psi and omega.
 	a: modify settings.py "#For making Histogram Files in kcal/mol" block, if needed.
-	b: run "runconfig_to_phi_psi_histogram.py"
-	
+	b: run "runconfig_to_phi_psi_histogram.py"	
 	It will generate histogram files in global_settings.QM_histogram_file_out_dir
 	CHEKC fFOR OMEGA
 

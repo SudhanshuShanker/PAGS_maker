@@ -7,7 +7,7 @@ Steps To Run PAGS-Maker Pipeline
 
 Edit the settings.py file for ORCA and AMBERHOME and other IO settings.
 
-**Step1: Make a simplified PDB file for a linkage**  
+**Step1: Make a simplified PDB file for a linkage**
 *  Make a list file with linkage names (like ./bin/model_lists/list_example) 
 	   [follow the extra/linkage_grammer_file.dat]  
 *  Modify "for molecular maker" block in settings.py for the list path (model_name_list) and  pdb_out_dir if rquired.  
@@ -103,7 +103,7 @@ To save time and try many parameters, run this code in silent mode for using dif
 >> for i in 3 4 5 6 7; do ../../gaussian_fitter_independent FNA2toFNA3W0_phi.exphist $i 0; done
 ```
 
-This step will perform all calculations for given series of gaussian expansion numbers and generate required parameters in _.data_parameters directory_ for next faster access. So you do not need to spend time for running same calculations twice.  
+This step will perform all calculations for given set of gaussian expansion numbers and generate required parameters in _.data_parameters directory_ for next faster access. So you do not need to spend time for running same calculations twice.  
 
 Now running the same command will take a few seconds:
 ```sh

@@ -63,7 +63,7 @@ Format:
 	
 **1st line**: "completed" or "submit" shows calculation status.  
 **2nd line**: Project directory name.  
-**Next lines**:  "PHI  PSI   ENEGRY(in Hartree)"  
+**Next lines**:  "$\phi$($^o$)  $\psi$($^o$)   ENEGRY(in Hartree)"  
 
 $~$
 

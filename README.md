@@ -19,6 +19,7 @@ $~$
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
 	
 $~$
+
 **Step2: Generate a rotational ensemble and QM input files**  
 *  Modify settings.py in "for ensemble making and input file generation" block.  
 *  run make_ensemble_and_qm_inputs.py  
@@ -41,6 +42,7 @@ and output_files named as *global_settings.QM_out_dir_file_name* (settings.py). 
 	.
 	
 $~$
+
 **Step3: Extract QM energy for each structure**
 *  Run "QM_energy extractor.py". This program will read QM energy values from score files and write final values in
 "*.runconfig" files in *global_settings.output_ensemble_dir* (settings.py).  
@@ -64,6 +66,7 @@ Format:
 **Next lines**:  "PHI  PSI   ENEGRY(in Hartree)"  
 
 $~$
+
 **Step4: Generate_energy histograms for phi, psi and omega.**
 *  Modify settings.py "#For making Histogram Files in kcal/mol" block, if needed.  
 *  Run "runconfig_to_phi_psi_histogram.py"  
@@ -75,6 +78,7 @@ $~$
 CHEKC fFOR OMEGA
 
 $~$
+
 **Step5: Make independent PAGS files**  
 Use *gaussian_fitter_independent.py*   
 *This program uses sklearn to fit gaussian expansion terms with the histogram data*  
@@ -123,6 +127,7 @@ Generated PAGS file looks like: (for g=4)
 	d    -0.4806548   # intercept (coefficient of zeroth order term)
 
 $~$
+
 **Step7: Cluster similar potential functions**
 
 

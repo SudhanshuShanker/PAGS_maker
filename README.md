@@ -150,7 +150,7 @@ This part is a little tricky. We have provided one example here to show how it w
 
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PHI.png" alt="drawing" width="700"/>
 
-This clustering is directly used for clustered $\phi$ parameters. (yes you need to refit avaraged exphist file to generate parameter).
+This clustering is directly used for clustered $\phi$ parameters. (Yes you need to refit averaged exphist file to generate parameter using "gaussian_fitter_independent.py" code [as shown in Step5]).
 
 * For 'phi_or_psi_out = "PSI" ' the clustering looks like:
 

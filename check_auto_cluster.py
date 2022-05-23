@@ -191,7 +191,7 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
    
 
 if __name__ == '__main__':
-    phi_or_psi_out = "PSI"
+    phi_or_psi_out = "PHI"
     in_file_dir = "./bin/parameter_files/Pyranose_Furanose_W0/"    
     out_file_dir = "./bin/parameter_files/Pyranose_Furanose_W0/clustered_pots/"    
     

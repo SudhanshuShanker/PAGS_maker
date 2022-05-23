@@ -156,9 +156,9 @@ This clustering is directly used for clustered $\phi$ parameters. (yes you need 
 
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PSI.png" alt="drawing" width="700"/>
 
-This does not look like a perfect clustering so, we have manually assigned some clusters to make our final $\psi$ averaged parameters.
+This does not look like a perfect clustering so, we have manually moved some profiles to make our final $\psi$ averaged parameters.
 
-* Manually modified parameters for $\psi$ .
+* Manually modified $\psi$ parameters.
 
 
 

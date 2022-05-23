@@ -148,7 +148,7 @@ This part is a little tricky. We have provided one example here to show how it w
 
 * For 'phi_or_psi_out = "PHI" ' the clustering looks like:
 
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PHI.png" alt="drawing" width="500"/>
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PHI.png" alt="drawing" width="700"/>
 
 
 	

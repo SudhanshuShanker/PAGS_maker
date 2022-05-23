@@ -130,9 +130,6 @@ def ss_list_all_files_with_ext(dir_path, extn):
             
 
 
-
-
-
 def extract_pdb_data( all_data):
     return_block =[]
     for i in all_data:
@@ -175,7 +172,7 @@ def ss_distance(F,G):
 import numpy as np
 import matplotlib.pyplot as plt
 
-class CHI_energy_from_gaussian_file():
+class PAGS_energy_from_gaussian_file():
     def __init__(self,filen):
         self.filen = filen
         self.abc=[]

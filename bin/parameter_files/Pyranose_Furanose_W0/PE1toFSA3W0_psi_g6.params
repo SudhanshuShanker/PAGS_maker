@@ -1,0 +1,4 @@
+a     1.550788      2.065070e2   -2.000000e2   -1.509776e2    1.351070e2    1.215513      # magnitudes of the distributions
+b     3.981009e1    1.764246e2    1.740537e2    2.364140e2    2.369877e2    3.570398e2    # midpoints of the distributions
+c     4.645122e3    4.957368e3    4.426438e3    1.970953e3    1.850554e3    6.000000e2    # twice the squares of the widths of the distributions
+d    -0.0099650   # intercept (coefficient of zeroth order term)

@@ -144,6 +144,10 @@ $~$
 
 This part is a little tricky. We have provided one example here to show how it works. We have done separate clustering for PHI and PSI profiles and, we have used DBSCAN2 as our main clustering algorithm.
 
+* use clustering_using_dbscan.py as an example. It uses param files generated for diffent Pyranose-Furanose linkages with 0 omega in directory *"./bin/parameter_files/Pyranose_Furanose_W0/"*. To run this example for PHI or PSI change "phi_or_psi_out" variable given in the end of the file.
+
+
+
 
 	
 

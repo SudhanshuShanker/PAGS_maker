@@ -1,0 +1,11 @@
+# The function is defined for the range [0, 360).
+# You can name parameter set as first linkID name.
+# works for linkages: 's?5sE4_s?6cE1_0_PSI', 's?6cA4_s?5nA2_0_PSI', 's?6cA4_s?5sE2_0_PSI', 's?6cE3_s?5sE2_0_PSI', 's?5nA4_s?6cA1_0_PSI', 's?5nE3_s?6cE1_0_PSI'
+
+LINKID PF6S  s?5nA4_s?6cA1_0_PSI s?5nE3_s?6cE1_0_PSI s?5sE4_s?6cE1_0_PSI  s?6cA4_s?5nA2_0_PSI s?6cA4_s?5sE2_0_PSI s?6cE3_s?5sE2_0_PSI
+FUNCTION    GAUSSIAN     # the type of equation GAUSSIAN :gaussian and VONMISES :Von-Mises
+a     4.741311      2.459307      4.399598     -8.890620e-1   1.104663      4.950929      # magnitudes of the distributions
+b     3.637027      6.855387e1    1.342909e2    2.063472e2    2.339627e2    3.695801e2    # midpoints of the distributions
+c     1.913772e3    1.385960e3    1.508073e3    7.485353e2    1.941885e3    3.179568e3    # twice the squares of the widths of the distributions
+d     0.0105099   # intercept (coefficient of zeroth order term)
+

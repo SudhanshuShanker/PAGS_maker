@@ -142,6 +142,8 @@ $~$
 
 **Step6: Cluster similar potential functions**
 
+This part is a little tricky. We have provided one example here to show how it works. We have done separate clustering for PHI and PSI profiles and, we have used DBSCAN2 as our main clustering algorithm.
+
 
 	
 

@@ -158,7 +158,7 @@ This clustering is directly used for clustered $\phi$ parameters. (yes you need 
 
 This does not look like a perfect clustering so, we have manually assigned some clusters to make our final $\psi$ averaged parameters.
 
-* Manually modified parameters for $\psi$.
+* Manually modified parameters for $\psi$ .
 
 
 

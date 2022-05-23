@@ -150,6 +150,17 @@ This part is a little tricky. We have provided one example here to show how it w
 
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PHI.png" alt="drawing" width="700"/>
 
+This clustering is directly used for clustered $\phi$ parameters. (yes you need to refit avaraged exphist file to generate parameter).
+
+* For 'phi_or_psi_out = "PSI" ' the clustering looks like:
+
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PSI.png" alt="drawing" width="700"/>
+
+This does not look like a perfect clustering so, we have manually assigned some clusters to make our final $\psi$ averaged parameters.
+
+* Manually modified parameters for $\psi$.
+
+
 
 	
 

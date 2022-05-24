@@ -170,7 +170,7 @@ This does not look like a perfect clustering as profiles for $\psi$ have subtle 
 
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PSI_manual.png" alt="drawing" width="700"/>
 
-**For clustering we have given more preference to matching minima rather than maxima.
+**For clustering we have given more priority to match minima rather than maxima.
 
 **Extra steps for $\omega$**  
 
@@ -180,7 +180,7 @@ c): Rotational ensemble (for $\phi$ and $\psi$) will be generated for all six st
 d): QM calculation will be done similarly as given previously.  
 e): QM_energy_extractor.py will generate new unscaled files for omega in directory ...  
 f): Now running make_omega_potential.py will make files for $\omega$ potentials.  
-e): if required, clustering steps will be similar.  
+e): If required, clustering steps will be similar.  
 
 **EXAMPLE FILES FOR BOTH WITH AND WITHOUT $\omega$ CASES ARE GIVEN IN "EXTRA" DIRCTORY.**  
 	

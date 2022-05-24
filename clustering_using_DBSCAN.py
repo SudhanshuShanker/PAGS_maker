@@ -52,6 +52,28 @@ def list_phi_or_psi_files(in_file_dir, phi_or_psi_out):
 
     return use_files
 
+def join_clusters(cluster_list,i,j):
+    main = j
+    merge = i
+    if i < j:
+        main = i
+        merge = j
+    
+    return_v =[]
+    for v in cluster_list:
+        if v== merge:
+            return_v.append(main)
+        else:
+            shifter=0
+            if v > merge:
+                shifter = 1
+                
+            return_v.append(v-shifter)
+            
+    
+    
+    
+    return np.array(return_v)
 
 
 
@@ -60,7 +82,7 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
      
     ## Setup the PAGS parameter loader 
     handle = PAGS_energy_from_gaussian_file(" ")
-    handle.step_angle = 10
+    handle.step_angle = 1
     handle.remap_360=0
     handle.print_me = 0
     handle.plot = False
@@ -80,11 +102,11 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
         fig_size = (12,3)
     else:                       #setting is loading PSI files
         handle.phi_treat = 0
-        cut_off = 5.  # ignore high energy values more than
-        eps_v = 1.2 # for DBSCAN
-        rows = 4
+        cut_off = 2.  # ignore high energy values more than
+        eps_v = .4 # for DBSCAN
+        rows = 3
         columns = 5
-        yticks = (range(0,8,2))
+        yticks = (range(0,9,2))
         fig_size = (12,12)
 
   
@@ -116,18 +138,36 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
     # clustering profiles using DBSCAN 
     clustering = DBSCAN(eps=eps_v, min_samples=1).fit(scores)
     
+    
+    manual_clusters = clustering.labels_[:]
+    if phi_or_psi_out == 'PSI':
+        manual_clusters = join_clusters(manual_clusters,17,26) # visually identified
+        manual_clusters = join_clusters(manual_clusters,15,21) 
+        manual_clusters = join_clusters(manual_clusters,21,26) 
+        manual_clusters = join_clusters(manual_clusters,20,25) 
+        manual_clusters = join_clusters(manual_clusters,10,16)
+        manual_clusters = join_clusters(manual_clusters,2,21)
+        manual_clusters = join_clusters(manual_clusters,15,18)
+        manual_clusters = join_clusters(manual_clusters,10,13)
+        manual_clusters = join_clusters(manual_clusters,17,16)
+        manual_clusters = join_clusters(manual_clusters,3,19)
+        manual_clusters = join_clusters(manual_clusters,2,19)
+        manual_clusters = join_clusters(manual_clusters,1,6)
+        manual_clusters = join_clusters(manual_clusters,1,17)
+        manual_clusters = join_clusters(manual_clusters,10,15)
+        manual_clusters = join_clusters(manual_clusters,0,15)
        
     # calculating mean profiles and names of linkages in each cluster
     cluster_files =dict()
     cluster_links = dict()
     mean_profs = dict()
-    number_of_clusters = np.max(clustering.labels_)+1  
+    number_of_clusters = np.max(manual_clusters)+1  
     for i in range(number_of_clusters):              
         
         curr_files = []  # for files of same clusters        
         curr_links = "LINKID " + "PFW" + str(i+1) + phi_or_psi_out[1] +"  " 
         # for link names of same cluster
-        idx = np.where( clustering.labels_ == i ) # members of same cluster
+        idx = np.where( manual_clusters == i ) # members of same cluster
         for j in idx[0]:
             curr_files.append(use_param_files[j])
             curr_links = curr_links + link_name_converter(use_param_files[j]) +"  "
@@ -136,14 +176,14 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
         cluster_links[i] = curr_links
 
         # mean profiles of each cluster
-        mean_prof = np.mean(profs[np.where(clustering.labels_==i)[0]],0) 
+        mean_prof = np.mean(profs[np.where(manual_clusters==i)[0]],0) 
         mean_profs[i]= mean_prof
 
 
     # Plotting similar profiles in same subplots   
     fig=plt.figure(figsize=fig_size)
     #plt.subplots(1,columns)
-    for i in range(number_of_clusters):
+    for i in range(np.max(manual_clusters)+1):
         plt.subplot(rows,columns,i+1)
         
         
@@ -160,9 +200,9 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
                 
 
 
-        for j in np.where(clustering.labels_==i)[0]:
+        for j in np.where(manual_clusters==i)[0]:
             plt.plot(handle.x_s,profs[j])
-            
+        plt.title(i)
         plt.plot(handle.x_s,mean_profs[i],'k--')
         plt.yticks(yticks)
         plt.xticks(xticks)

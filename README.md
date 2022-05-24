@@ -170,8 +170,9 @@ c): Ensemble will be generated for all six structures.
 d): qm calculation will be done similarly as given previously.  
 e): QM_energy_extractor.py will generate new unscaled files for omega in directory ...  
 f): Now running make_omega_potential.py will make files for $\omega$ potentials.  
+e): if required, clustering steps will be similar.  
 
-
+**EXAMPLE FILES FOR BOTH WITH AND WITHOUT $\omega$ CASES ARE GIVEN IN EXTRA DIRCTORY.**  
 	
 
 

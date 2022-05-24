@@ -33,7 +33,7 @@ This step will generate a simplified pdb molecule in global_settings.simplified_
 <p align="center">
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0_phi180.png" alt="drawing" width="250"/>
 </p>
-<p align="center"> A look at clean ensemble for $\phi$ = 180 "FNA2toFNA3W0" </p>
+<p align="center"> A look at clean ensemble for $\phi$ = 180 for "FNA2toFNA3W0" </p>
 
 
 
@@ -91,9 +91,8 @@ $~$
 >> ./runconfig_to_phi_psi_histogram.py
 ```
 
-*  It will generate histogram files in global_settings.QM_histogram_file_out_dir
-CHEKC fFOR OMEGA
-
+*  It will generate histogram files in global_settings.QM_histogram_file_out_dir  
+*  For omega inclusion see the end of this document. 
 $~$
 
 **Step5: Make independent PAGS files**  
@@ -177,8 +176,8 @@ This does not look like a perfect clustering as profiles for $\psi$ have subtle 
 
 a): For a linkage with an $\omega$ dihedral example, modify settings.py file and use the *global_settings.list_of_linkage_names* for $\omega$ example.  
 b): Running molecular_maker.py will generate 6 structures (for fixed $\omega$ values at 60$^o$, 180$^o$, and 300$^o$ (3) x O in axial or equtorial(2))  
-c): Ensemble will be generated for all six structures.  
-d): qm calculation will be done similarly as given previously.  
+c): Rotational ensemble (for $\phi$ and $\psi$) will be generated for all six structures.  
+d): QM calculation will be done similarly as given previously.  
 e): QM_energy_extractor.py will generate new unscaled files for omega in directory ...  
 f): Now running make_omega_potential.py will make files for $\omega$ potentials.  
 e): if required, clustering steps will be similar.  

@@ -18,7 +18,7 @@ $~$
 ```
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
 
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0.png" alt="drawing" width="700"/>
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0.png" alt="drawing" width="200"/>
 	
 $~$
 

@@ -17,6 +17,8 @@ $~$
 >> ./molecule_maker.py
 ```
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
+
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0.png" alt="drawing" width="700"/>
 	
 $~$
 
@@ -172,7 +174,7 @@ e): QM_energy_extractor.py will generate new unscaled files for omega in directo
 f): Now running make_omega_potential.py will make files for $\omega$ potentials.  
 e): if required, clustering steps will be similar.  
 
-**EXAMPLE FILES FOR BOTH WITH AND WITHOUT $\omega$ CASES ARE GIVEN IN EXTRA DIRCTORY.**  
+**EXAMPLE FILES FOR BOTH WITH AND WITHOUT $\omega$ CASES ARE GIVEN IN "EXTRA" DIRCTORY.**  
 	
 
 

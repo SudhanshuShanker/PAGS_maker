@@ -23,7 +23,8 @@ global_settings.AMBERSETTINGS.temp_dir = "./temp/"
 
 
 #for molecule maker
-global_settings.list_of_linkage_names = "./bin/model_lists/list_example"
+#global_settings.list_of_linkage_names = "./bin/model_lists/list_example" #for linkage without omega
+global_settings.list_of_linkage_names = "./bin/model_lists/list_example_with_omega" #for linkage with omega
 global_settings.simplified_pdb_output_dir = "./output/1_molecule_maker_pdbs/"
 
 #for ensemble making and input file generation

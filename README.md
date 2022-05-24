@@ -162,7 +162,7 @@ This does not look like a perfect clustering as profiles for $\psi$ have subtle 
 
 **For clustering we have given more preference to matching minima rather than maxima.
 
-**Extra steps for Omega**
+**Extra steps for $\omega$**  
 
 * For a linkage with an $\omega$ dihedral example, modify settings.py file and use the global_settings.list_of_linkage_names for omega example.
 * Running molecular_maker.py will generate 6 structures (for fixed $\omega$ values at 60$^o$, 180$^o$, and 300$^o$ (3) x O)

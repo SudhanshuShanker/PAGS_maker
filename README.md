@@ -42,7 +42,7 @@ and output_files named as *global_settings.QM_out_dir_file_name* (settings.py). 
 #	.-->
 <!-- ![QM Output File Arrangement](https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png)	 -->
 
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png" alt="QM Output File Arrangement" width="350"/>
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/QM_dir_view.png" alt="QM Output File Arrangement" width="450"/>
 
 $~$
 
@@ -123,11 +123,11 @@ Now running the same command will take a few seconds:
 ```
 *For the given case, use of 4 gaussian terms gives fittings like:*  
 
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/gaus_fit_4.png" alt="drawing" width="500"/>
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/gaus_fit_4.png" alt="drawing" width="700"/>
 
 
 ***For the given example, best fitting can be obtained for g=7 and calculation number (selection number) 1,3,4 or 5.*  
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/gaus_fit_7.png" alt="drawing" width="500"/>
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/gaus_fit_7.png" alt="drawing" width="700"/>
 
 Generated PAGS file looks like: (for g=4)
 	
@@ -159,6 +159,8 @@ This clustering is directly used for clustered $\phi$ parameters. (Yes you need 
 This does not look like a perfect clustering as profiles for $\psi$ have subtle difference from diffent clusters, so we made 20 clusters with multiple similar looking clustrers.  
 
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/PSI_manual.png" alt="drawing" width="700"/>
+
+**For clustering we have given more preference to matching minima rather than maxima.
 
 **Extra steps for Omega**
 

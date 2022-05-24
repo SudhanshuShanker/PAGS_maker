@@ -19,10 +19,9 @@ $~$
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
 <p align="center">
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0.png" alt="drawing" width="250"/>
+</p>
+<p align="center"> Simplified pdb file for linkage code "FNA2toFNA3W0" </p>
 
- Simplified pdb file for linkage code "FNA2toFNA3W0" </p>
-
-$~$
 
 **Step2: Generate a rotational ensemble and QM input files**  
 *  Modify settings.py in "for ensemble making and input file generation" block.  
@@ -30,6 +29,14 @@ $~$
 ``` sh
 >> ./make_ensemble_and_qm_inputs.py
 ```
+
+<p align="center">
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0_phi180.png" alt="drawing" width="250"/>
+</p>
+<p align="center"> A look at clean ensemble for $\phi$ = 180 "FNA2toFNA3W0" </p>
+
+
+
 Use input files generated in *global_settings.output_ensemble_dir/project_****/QM_inps* for QM calculation (ORCA.)
 I used condor for the calculation (see bin/tools/QM_tools file for all raw files).  
 

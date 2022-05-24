@@ -79,9 +79,9 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
         yticks = (range(0,15,2))
     else:                       #setting is loading PSI files
         handle.phi_treat = 0
-        cut_off = 5.5  # ignore high energy values more than
-        eps_v = 2. # for DBSCAN
-        rows = 2
+        cut_off = 5  # ignore high energy values more than
+        eps_v = 1.2 # for DBSCAN
+        rows = 5
         columns = 4
         yticks = (range(0,8,2))
 
@@ -139,7 +139,7 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
 
 
     # Plotting similar profiles in same subplots   
-    fig=plt.figure(figsize=(12,3))
+    fig=plt.figure()
     #plt.subplots(1,columns)
     for i in range(number_of_clusters):
         plt.subplot(rows,columns,i+1)
@@ -191,7 +191,7 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
    
 
 if __name__ == '__main__':
-    phi_or_psi_out = "PHI"
+    phi_or_psi_out = "PSI"
     in_file_dir = "./bin/parameter_files/Pyranose_Furanose_W0/"    
     out_file_dir = "./bin/parameter_files/Pyranose_Furanose_W0/clustered_pots/"    
     

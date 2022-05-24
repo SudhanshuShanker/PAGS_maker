@@ -77,13 +77,15 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
         rows = 1
         xticks = (range(-180,181,120)) # as phi ranges from -180 to 180
         yticks = (range(0,15,2))
+        fig_size = (12,3)
     else:                       #setting is loading PSI files
         handle.phi_treat = 0
-        cut_off = 5  # ignore high energy values more than
+        cut_off = 5.  # ignore high energy values more than
         eps_v = 1.2 # for DBSCAN
-        rows = 5
-        columns = 4
+        rows = 4
+        columns = 5
         yticks = (range(0,8,2))
+        fig_size = (12,12)
 
   
     # reading param files from directory 
@@ -139,7 +141,7 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
 
 
     # Plotting similar profiles in same subplots   
-    fig=plt.figure()
+    fig=plt.figure(figsize=fig_size)
     #plt.subplots(1,columns)
     for i in range(number_of_clusters):
         plt.subplot(rows,columns,i+1)
@@ -151,9 +153,9 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
             if i==2:
                 plt.xlabel("Angle [Degree]", fontsize = 12)
         else:
-            if i==4:
+            if [5,10,15].count(i) == 1:
                 plt.ylabel("kcal/mol", fontsize = 12)
-            if i >3:
+            if i >14:
                 plt.xlabel("Angle [Degree]", fontsize = 12)
                 
 

@@ -38,9 +38,9 @@ def make_histogram_files():
             counter += 1
             name_linakge = read_runconfig_file_and_make_phi_psi_histfiles(
                 runconfig_file, hist_file_out_dir )
-            if name_linakge.endswith("W1"):
+            if name_linakge.count("W1_")>0:
                 if not os.path.exists(hist_file_out_dir + 'for_omega/'):
-                    os.mkdir( hist_file_out_dir +' for_omega/')
+                    os.mkdir( hist_file_out_dir +'for_omega/')
                 read_runconfig_file_and_make_phi_psi_histfiles_no_norm(
                     runconfig_file, hist_file_out_dir+'for_omega/')
         print("Completed!")

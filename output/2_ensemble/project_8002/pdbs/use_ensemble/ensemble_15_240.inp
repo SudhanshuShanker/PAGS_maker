@@ -1,0 +1,62 @@
+# Test redundant internal optimization
+#
+! RKS B3LYP  Opt TightSCF SmallPrint
+
+%basis
+        Basis "6-31G"
+end
+
+%geom
+Constraints
+{ D 4  0  15  12  15.0   C } # D for Dihedral angle
+{ D 0  15  12  16  240.0   C } # D for Dihedral angle
+{ D 0  4  3  2   C } # D for Dihedral angle
+{ D 4  3  2  1   C } # D for Dihedral angle
+{ D 3  2  1  0   C } # D for Dihedral angle
+{ D 2  1  0  4   C } # D for Dihedral angle
+{ D 1  0  4  3   C } # D for Dihedral angle
+{ D 16  20  19  18   C } # D for Dihedral angle
+{ D 20  19  18  17   C } # D for Dihedral angle
+{ D 19  18  17  16   C } # D for Dihedral angle
+{ D 18  17  16  20   C } # D for Dihedral angle
+{ D 17  16  20  19   C } # D for Dihedral angle
+{ D 15  12  16  20   C } # D for Dihedral angle
+end
+end
+
+
+#%pal 
+#nprocs 8
+#end
+
+* xyz 0 1
+C  -21.048   26.222   46.251
+C  -20.361   27.558   45.944
+C  -20.329   28.222   47.341
+C  -20.110   27.022   48.296
+O  -20.473   25.807   47.535
+H  -20.833   25.428   45.533
+H  -19.344   27.382   45.576
+H  -20.898   28.157   45.201
+H  -19.543   28.978   47.434
+H  -21.289   28.710   47.548
+H  -20.733   27.082   49.195
+H  -19.064   26.913   48.597
+C  -23.128   26.462   47.829
+H  -22.289   26.382   48.532
+H  -23.633   27.421   48.006
+O  -22.586   26.394   46.375
+C  -24.142   25.328   48.146
+C  -25.302   25.322   47.144
+C  -24.659   24.616   45.925
+C  -23.712   23.579   46.578
+O  -23.511   24.015   47.978
+H  -24.448   25.404   49.191
+H  -26.135   24.730   47.537
+O  -25.826   26.744   46.808
+H  -25.397   24.150   45.266
+H  -24.087   25.339   45.330
+H  -22.740   23.522   46.077
+H  -24.151   22.577   46.614
+H  -25.007   27.355   46.412
+*

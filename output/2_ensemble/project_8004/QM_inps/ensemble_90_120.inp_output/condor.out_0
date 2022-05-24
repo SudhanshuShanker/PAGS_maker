@@ -1,0 +1,924 @@
+
+                                 *****************
+                                 * O   R   C   A *
+                                 *****************
+
+           --- An Ab Initio, DFT and Semiempirical electronic structure package ---
+
+                  #######################################################
+                  #                        -***-                        #
+                  #          Department of theory and spectroscopy      #
+                  #               Directorship: Frank Neese             #
+                  #        Max Planck Institute fuer Kohlenforschung    #
+                  #                Kaiser Wilhelm Platz 1               #
+                  #                 D-45470 Muelheim/Ruhr               #
+                  #                      Germany                        #
+                  #                                                     #
+                  #                  All rights reserved                #
+                  #                        -***-                        #
+                  #######################################################
+
+
+                         Program Version 4.2.0 -  RELEASE  -
+
+
+ With contributions from (in alphabetic order):
+   Daniel Aravena         : Magnetic Suceptibility
+   Michael Atanasov       : Ab Initio Ligand Field Theory (pilot matlab implementation)
+   Alexander A. Auer      : GIAO ZORA, VPT2
+   Ute Becker             : Parallelization
+   Giovanni Bistoni       : ED, misc. LED, open-shell LED, HFLED
+   Martin Brehm           : Molecular dynamics
+   Dmytro Bykov           : SCF Hessian
+   Vijay G. Chilkuri      : MRCI spin determinant printing, contributions to CSF-ICE
+   Dipayan Datta          : RHF DLPNO-CCSD density
+   Achintya Kumar Dutta   : EOM-CC, STEOM-CC
+   Dmitry Ganyushin       : Spin-Orbit,Spin-Spin,Magnetic field MRCI
+   Miquel Garcia          : C-PCM Hessian, Gaussian charge scheme
+   Yang Guo               : DLPNO-NEVPT2, CIM, IAO-localization
+   Andreas Hansen         : Spin unrestricted coupled pair/coupled cluster methods
+   Benjamin Helmich-Paris : CASSCF linear response (MC-RPA)
+   Lee Huntington         : MR-EOM, pCC
+   Robert Izsak           : Overlap fitted RIJCOSX, COSX-SCS-MP3, EOM
+   Christian Kollmar      : KDIIS, OOCD, Brueckner-CCSD(T), CCSD density
+   Simone Kossmann        : Meta GGA functionals, TD-DFT gradient, OOMP2, MP2 Hessian
+   Martin Krupicka        : AUTO-CI
+   Lucas Lang             : DCDCAS
+   Dagmar Lenk            : GEPOL surface, SMD
+   Dimitrios Liakos       : Extrapolation schemes; Compound Job, initial MDCI parallelization
+   Dimitrios Manganas     : Further ROCIS development; embedding schemes
+   Dimitrios Pantazis     : SARC Basis sets
+   Taras Petrenko         : DFT Hessian,TD-DFT gradient, ASA, ECA, R-Raman, ABS, FL, XAS/XES, NRVS
+   Peter Pinski           : DLPNO-MP2, DLPNO-MP2 Gradient
+   Christoph Reimann      : Effective Core Potentials
+   Marius Retegan         : Local ZFS, SOC
+   Christoph Riplinger    : Optimizer, TS searches, QM/MM, DLPNO-CCSD(T), (RO)-DLPNO pert. Triples
+   Tobias Risthaus        : Range-separated hybrids, TD-DFT gradient, RPA, STAB
+   Michael Roemelt        : Original ROCIS implementation
+   Masaaki Saitow         : Open-shell DLPNO-CCSD energy and density
+   Barbara Sandhoefer     : DKH picture change effects
+   Avijit Sen             : IP-ROCIS
+   Kantharuban Sivalingam : CASSCF convergence, NEVPT2, FIC-MRCI
+   Bernardo de Souza      : ESD, SOC TD-DFT
+   Georgi Stoychev        : AutoAux, RI-MP2 NMR
+   Willem Van den Heuvel  : Paramagnetic NMR
+   Boris Wezisla          : Elementary symmetry handling
+   Frank Wennmohs         : Technical directorship
+
+
+ We gratefully acknowledge several colleagues who have allowed us to
+ interface, adapt or use parts of their codes:
+   Stefan Grimme, W. Hujo, H. Kruse,             : VdW corrections, initial TS optimization,
+                  C. Bannwarth                     DFT functionals, gCP, sTDA/sTD-DF
+   Ed Valeev, F. Pavosevic, A. Kumar             : LibInt (2-el integral package), F12 methods
+   Garnet Chan, S. Sharma, J. Yang, R. Olivares  : DMRG
+   Ulf Ekstrom                                   : XCFun DFT Library
+   Mihaly Kallay                                 : mrcc  (arbitrary order and MRCC methods)
+   Andreas Klamt, Michael Diedenhofen            : otool_cosmo (COSMO solvation model)
+   Jiri Pittner, Ondrej Demel                    : Mk-CCSD
+   Frank Weinhold                                : gennbo (NPA and NBO analysis)
+   Christopher J. Cramer and Donald G. Truhlar   : smd solvation model
+   Lars Goerigk                                  : TD-DFT with DH, B97 family of functionals
+   V. Asgeirsson, H. Jonsson                     : NEB implementation
+   FAccTs GmbH                                   : IRC, NEB, NEB-TS, Multilevel, MM, QM/MM, CI optimization
+   S Lehtola, MJT Oliveira, MAL Marques          : LibXC Library
+
+
+ Your calculation uses the libint2 library for the computation of 2-el integrals
+ For citations please refer to: http://libint.valeyev.net
+
+ Your ORCA version has been built with support for libXC version: 4.2.3
+ For citations please refer to: https://tddft.org/programs/libxc/
+
+ This ORCA versions uses:
+   CBLAS   interface :  Fast vector & matrix operations
+   LAPACKE interface :  Fast linear algebra routines
+   SCALAPACK package :  Parallel linear algebra routines
+
+
+----- Orbital basis set information -----
+Your calculation utilizes the basis: 6-31G
+   H-He, Li-Ne : W. J. Hehre, R. Ditchfield and J.A. Pople, J. Chem. Phys. 56, 2257 (1972).
+                 Note: He and Ne are unpublished basis sets taken from the Gaussian program.
+                 Note: Li and B from J. D. Dill and J. A. Pople, J. Chem. Phys. 62, 2921 (1975).
+   Na - Ar     : M. M. Francl, W. J. Pietro, W. J. Hehre, J. S. Binkley, M. S. Gordon, 
+                 D. J. DeFrees and J. A. Pople, J. Chem. Phys. 77, 3654 (1982).
+   K - Zn      : V. A. Rassolov, J. A. Pople, M. A. Ratner, and T. L. Windus, J. Chem. Phys. 109, 1223 (1998).
+
+================================================================================
+                                        WARNINGS
+                       Please study these warnings very carefully!
+================================================================================
+
+
+WARNING: Geometry Optimization
+  ===> : Switching off AutoStart
+         For restart on a previous wavefunction, please use MOREAD
+
+INFO   : the flag for use of LIBINT has been found!
+
+================================================================================
+                                       INPUT FILE
+================================================================================
+NAME = project_8051/ensemble_90_120.inp
+|  1> # Test redundant internal optimization
+|  2> #
+|  3> ! RKS B3LYP  Opt TightSCF SmallPrint
+|  4> 
+|  5> %basis
+|  6>         Basis "6-31G"
+|  7> end
+|  8> 
+|  9> %geom
+| 10> Constraints
+| 11> { D 4  0  15  12  90.0   C } # D for Dihedral angle
+| 12> { D 0  15  12  16  120.0   C } # D for Dihedral angle
+| 13> { D 0  4  3  2   C } # D for Dihedral angle
+| 14> { D 4  3  2  1   C } # D for Dihedral angle
+| 15> { D 3  2  1  0   C } # D for Dihedral angle
+| 16> { D 2  1  0  4   C } # D for Dihedral angle
+| 17> { D 1  0  4  3   C } # D for Dihedral angle
+| 18> { D 16  20  19  18   C } # D for Dihedral angle
+| 19> { D 20  19  18  17   C } # D for Dihedral angle
+| 20> { D 19  18  17  16   C } # D for Dihedral angle
+| 21> { D 18  17  16  20   C } # D for Dihedral angle
+| 22> { D 17  16  20  19   C } # D for Dihedral angle
+| 23> { D 15  12  16  20   C } # D for Dihedral angle
+| 24> end
+| 25> end
+| 26> 
+| 27> 
+| 28> #%pal 
+| 29> #nprocs 8
+| 30> #end
+| 31> 
+| 32> * xyz 0 1
+| 33> C  -21.048   26.222   46.251
+| 34> C  -20.361   27.558   45.944
+| 35> C  -20.329   28.222   47.341
+| 36> C  -20.110   27.022   48.296
+| 37> O  -20.473   25.807   47.535
+| 38> H  -20.833   25.428   45.533
+| 39> H  -19.344   27.382   45.576
+| 40> H  -20.898   28.157   45.201
+| 41> H  -19.543   28.978   47.434
+| 42> H  -21.289   28.710   47.548
+| 43> H  -20.733   27.082   49.195
+| 44> H  -19.064   26.913   48.597
+| 45> C  -23.061   27.816   46.783
+| 46> H  -23.613   27.755   47.730
+| 47> H  -22.200   28.481   46.930
+| 48> O  -22.586   26.394   46.375
+| 49> C  -23.986   28.468   45.719
+| 50> C  -25.299   27.692   45.572
+| 51> C  -26.099   28.192   46.799
+| 52> C  -25.659   29.673   46.924
+| 53> O  -24.404   29.805   46.154
+| 54> H  -23.428   28.594   44.789
+| 55> H  -25.802   27.976   44.641
+| 56> O  -25.101   26.151   45.570
+| 57> H  -27.181   28.088   46.671
+| 58> H  -25.810   27.626   47.692
+| 59> H  -25.476   29.969   47.963
+| 60> H  -26.383   30.362   46.483
+| 61> H  -24.599   25.844   46.494
+| 62> *
+| 63> 
+| 64>                          ****END OF INPUT****
+================================================================================
+
+                       *****************************
+                       * Geometry Optimization Run *
+                       *****************************
+
+Geometry optimization settings:
+Update method            Update   .... BFGS
+Choice of coordinates    CoordSys .... Z-matrix Internals
+Initial Hessian          InHess   .... Almoef's Model
+
+Convergence Tolerances:
+Energy Change            TolE     ....  5.0000e-06 Eh
+Max. Gradient            TolMAXG  ....  3.0000e-04 Eh/bohr
+RMS Gradient             TolRMSG  ....  1.0000e-04 Eh/bohr
+Max. Displacement        TolMAXD  ....  4.0000e-03 bohr
+RMS Displacement         TolRMSD  ....  2.0000e-03 bohr
+Strict Convergence                ....  False
+------------------------------------------------------------------------------
+                        ORCA OPTIMIZATION COORDINATE SETUP
+------------------------------------------------------------------------------
+
+The optimization will be done in new redundant internal coordinates
+Making redundant internal coordinates   ...  (new redundants) done
+Evaluating the initial hessian          ...  (Almloef) done
+Evaluating the coordinates              ...  done
+Calculating the B-matrix                .... done
+Calculating the G-matrix                .... done
+Diagonalizing the G-matrix              .... done
+Imposing constraints:
+ Iter   0:  RMS(Cart)=    0.0000841264 RMS(Int)=    0.0000332806
+ Iter   1:  RMS(Cart)=    0.0000440819 RMS(Int)=    0.0000181278
+ Iter   2:  RMS(Cart)=    0.0000234442 RMS(Int)=    0.0000106004
+ Iter   3:  RMS(Cart)=    0.0000127294 RMS(Int)=    0.0000071073
+ Iter   4:  RMS(Cart)=    0.0000071287 RMS(Int)=    0.0000056361
+ Iter   5:  RMS(Cart)=    0.0000041863 RMS(Int)=    0.0000050306
+ Iter   6:  RMS(Cart)=    0.0000026385 RMS(Int)=    0.0000047393
+ Iter   7:  RMS(Cart)=    0.0000018266 RMS(Int)=    0.0000045538
+ Iter   8:  RMS(Cart)=    0.0000014004 RMS(Int)=    0.0000044051
+ Iter   9:  RMS(Cart)=    0.0000011721 RMS(Int)=    0.0000042713
+ Iter  10:  RMS(Cart)=    0.0000010430 RMS(Int)=    0.0000041452
+ Iter  11:  RMS(Cart)=    0.0000009636 RMS(Int)=    0.0000040242
+ Iter  12:  RMS(Cart)=    0.0000009094 RMS(Int)=    0.0000039076
+ Iter  13:  RMS(Cart)=    0.0000008685 RMS(Int)=    0.0000037948
+ Iter  14:  RMS(Cart)=    0.0000008349 RMS(Int)=    0.0000036857
+ Iter  15:  RMS(Cart)=    0.0000008057 RMS(Int)=    0.0000035801
+ Iter  16:  RMS(Cart)=    0.0000007792 RMS(Int)=    0.0000034778
+ Iter  17:  RMS(Cart)=    0.0000007545 RMS(Int)=    0.0000033788
+ Iter  18:  RMS(Cart)=    0.0000007311 RMS(Int)=    0.0000032829
+ Iter  19:  RMS(Cart)=    0.0000007087 RMS(Int)=    0.0000031899
+ Iter  20:  RMS(Cart)=    0.0000006872 RMS(Int)=    0.0000030999
+ Iter  21:  RMS(Cart)=    0.0000006665 RMS(Int)=    0.0000030127
+ Iter  22:  RMS(Cart)=    0.0000006465 RMS(Int)=    0.0000029283
+ Iter  23:  RMS(Cart)=    0.0000006272 RMS(Int)=    0.0000028464
+ Iter  24:  RMS(Cart)=    0.0000006085 RMS(Int)=    0.0000027671
+ Iter  25:  RMS(Cart)=    0.0000005905 RMS(Int)=    0.0000026902
+ Iter  26:  RMS(Cart)=    0.0000005729 RMS(Int)=    0.0000026158
+ Iter  27:  RMS(Cart)=    0.0000005560 RMS(Int)=    0.0000025436
+ Iter  28:  RMS(Cart)=    0.0000005396 RMS(Int)=    0.0000024736
+ Iter  29:  RMS(Cart)=    0.0000005238 RMS(Int)=    0.0000024058
+ Iter  30:  RMS(Cart)=    0.0000005084 RMS(Int)=    0.0000023400
+ Iter  31:  RMS(Cart)=    0.0000004934 RMS(Int)=    0.0000022763
+ Iter  32:  RMS(Cart)=    0.0000004790 RMS(Int)=    0.0000022145
+ Iter  33:  RMS(Cart)=    0.0000004650 RMS(Int)=    0.0000021546
+ Iter  34:  RMS(Cart)=    0.0000004514 RMS(Int)=    0.0000020965
+ Iter  35:  RMS(Cart)=    0.0000004383 RMS(Int)=    0.0000020402
+ Iter  36:  RMS(Cart)=    0.0000004256 RMS(Int)=    0.0000019855
+ Iter  37:  RMS(Cart)=    0.0000004133 RMS(Int)=    0.0000019325
+ Iter  38:  RMS(Cart)=    0.0000004012 RMS(Int)=    0.0000018812
+ Iter  39:  RMS(Cart)=    0.0000003898 RMS(Int)=    0.0000018313
+ Iter  40:  RMS(Cart)=    0.0000003785 RMS(Int)=    0.0000017829
+ Iter  41:  RMS(Cart)=    0.0000003676 RMS(Int)=    0.0000017360
+ Iter  42:  RMS(Cart)=    0.0000003571 RMS(Int)=    0.0000016905
+ Iter  43:  RMS(Cart)=    0.0000003468 RMS(Int)=    0.0000016464
+ Iter  44:  RMS(Cart)=    0.0000003369 RMS(Int)=    0.0000016036
+ Iter  45:  RMS(Cart)=    0.0000003274 RMS(Int)=    0.0000015620
+ Iter  46:  RMS(Cart)=    0.0000003180 RMS(Int)=    0.0000015216
+ Iter  47:  RMS(Cart)=    0.0000003089 RMS(Int)=    0.0000014825
+ Iter  48:  RMS(Cart)=    0.0000003002 RMS(Int)=    0.0000014445
+ Iter  49:  RMS(Cart)=    0.0000002917 RMS(Int)=    0.0000014077
+ Iter  50:  RMS(Cart)=    0.0000002836 RMS(Int)=    0.0000013719
+ Iter  51:  RMS(Cart)=    0.0000002755 RMS(Int)=    0.0000013371
+ Iter  52:  RMS(Cart)=    0.0000002677 RMS(Int)=    0.0000013034
+ Iter  53:  RMS(Cart)=    0.0000002601 RMS(Int)=    0.0000012706
+ Iter  54:  RMS(Cart)=    0.0000002529 RMS(Int)=    0.0000012389
+ Iter  55:  RMS(Cart)=    0.0000002460 RMS(Int)=    0.0000012080
+ Iter  56:  RMS(Cart)=    0.0000002391 RMS(Int)=    0.0000011780
+ Iter  57:  RMS(Cart)=    0.0000002323 RMS(Int)=    0.0000011489
+ Iter  58:  RMS(Cart)=    0.0000002259 RMS(Int)=    0.0000011207
+ Iter  59:  RMS(Cart)=    0.0000002197 RMS(Int)=    0.0000010932
+ Iter  60:  RMS(Cart)=    0.0000002137 RMS(Int)=    0.0000010666
+ Iter  61:  RMS(Cart)=    0.0000002077 RMS(Int)=    0.0000010407
+ Iter  62:  RMS(Cart)=    0.0000002019 RMS(Int)=    0.0000010155
+ Iter  63:  RMS(Cart)=    0.0000001964 RMS(Int)=    0.0000009911
+ Iter  64:  RMS(Cart)=    0.0000001911 RMS(Int)=    0.0000009674
+ Iter  65:  RMS(Cart)=    0.0000001858 RMS(Int)=    0.0000009443
+ Iter  66:  RMS(Cart)=    0.0000001807 RMS(Int)=    0.0000009219
+ Iter  67:  RMS(Cart)=    0.0000001758 RMS(Int)=    0.0000009001
+ Iter  68:  RMS(Cart)=    0.0000001710 RMS(Int)=    0.0000008790
+ Iter  69:  RMS(Cart)=    0.0000001664 RMS(Int)=    0.0000008584
+ Iter  70:  RMS(Cart)=    0.0000001620 RMS(Int)=    0.0000008384
+ Iter  71:  RMS(Cart)=    0.0000001573 RMS(Int)=    0.0000008190
+ Iter  72:  RMS(Cart)=    0.0000001536 RMS(Int)=    0.0000008001
+ Iter  73:  RMS(Cart)=    0.0000001491 RMS(Int)=    0.0000007818
+ Iter  74:  RMS(Cart)=    0.0000001451 RMS(Int)=    0.0000007640
+ Iter  75:  RMS(Cart)=    0.0000001413 RMS(Int)=    0.0000007466
+ Iter  76:  RMS(Cart)=    0.0000001372 RMS(Int)=    0.0000007298
+ Iter  77:  RMS(Cart)=    0.0000001340 RMS(Int)=    0.0000007134
+ Iter  78:  RMS(Cart)=    0.0000001303 RMS(Int)=    0.0000006974
+ Iter  79:  RMS(Cart)=    0.0000001269 RMS(Int)=    0.0000006820
+ Iter  80:  RMS(Cart)=    0.0000001236 RMS(Int)=    0.0000006669
+ Iter  81:  RMS(Cart)=    0.0000001202 RMS(Int)=    0.0000006522
+ Iter  82:  RMS(Cart)=    0.0000001171 RMS(Int)=    0.0000006380
+ Iter  83:  RMS(Cart)=    0.0000001141 RMS(Int)=    0.0000006241
+ Iter  84:  RMS(Cart)=    0.0000001109 RMS(Int)=    0.0000006106
+ Iter  85:  RMS(Cart)=    0.0000001082 RMS(Int)=    0.0000005975
+ Iter  86:  RMS(Cart)=    0.0000001052 RMS(Int)=    0.0000005847
+ Iter  87:  RMS(Cart)=    0.0000001026 RMS(Int)=    0.0000005722
+ Iter  88:  RMS(Cart)=    0.0000000997 RMS(Int)=    0.0000005602
+ Iter  89:  RMS(Cart)=    0.0000000974 RMS(Int)=    0.0000005484
+ Iter  90:  RMS(Cart)=    0.0000000946 RMS(Int)=    0.0000005369
+ Iter  91:  RMS(Cart)=    0.0000000924 RMS(Int)=    0.0000005258
+ Iter  92:  RMS(Cart)=    0.0000000900 RMS(Int)=    0.0000005150
+ Iter  93:  RMS(Cart)=    0.0000000879 RMS(Int)=    0.0000005043
+ Iter  94:  RMS(Cart)=    0.0000000852 RMS(Int)=    0.0000004941
+ Iter  95:  RMS(Cart)=    0.0000000832 RMS(Int)=    0.0000004840
+ Iter  96:  RMS(Cart)=    0.0000000810 RMS(Int)=    0.0000004743
+ Iter  97:  RMS(Cart)=    0.0000000791 RMS(Int)=    0.0000004648
+ Iter  98:  RMS(Cart)=    0.0000000770 RMS(Int)=    0.0000004555
+ Iter  99:  RMS(Cart)=    0.0000000753 RMS(Int)=    0.0000004465
+ RMS(Cart) too big - taking linear step, building new B-matrix and trying again
+Imposing constraints:
+ Iter   0:  RMS(Cart)=    0.0000440823 RMS(Int)=    0.0000181277
+ Iter   1:  RMS(Cart)=    0.0000234443 RMS(Int)=    0.0000106003
+ Iter   2:  RMS(Cart)=    0.0000127294 RMS(Int)=    0.0000071072
+ Iter   3:  RMS(Cart)=    0.0000071286 RMS(Int)=    0.0000056360
+ Iter   4:  RMS(Cart)=    0.0000041863 RMS(Int)=    0.0000050306
+ Iter   5:  RMS(Cart)=    0.0000026385 RMS(Int)=    0.0000047392
+ Iter   6:  RMS(Cart)=    0.0000018265 RMS(Int)=    0.0000045537
+ Iter   7:  RMS(Cart)=    0.0000014004 RMS(Int)=    0.0000044051
+ Iter   8:  RMS(Cart)=    0.0000011721 RMS(Int)=    0.0000042713
+ Iter   9:  RMS(Cart)=    0.0000010430 RMS(Int)=    0.0000041451
+ Iter  10:  RMS(Cart)=    0.0000009635 RMS(Int)=    0.0000040242
+ Iter  11:  RMS(Cart)=    0.0000009093 RMS(Int)=    0.0000039076
+ Iter  12:  RMS(Cart)=    0.0000008684 RMS(Int)=    0.0000037948
+ Iter  13:  RMS(Cart)=    0.0000008349 RMS(Int)=    0.0000036857
+ Iter  14:  RMS(Cart)=    0.0000008057 RMS(Int)=    0.0000035801
+ Iter  15:  RMS(Cart)=    0.0000007792 RMS(Int)=    0.0000034778
+ Iter  16:  RMS(Cart)=    0.0000007544 RMS(Int)=    0.0000033788
+ Iter  17:  RMS(Cart)=    0.0000007310 RMS(Int)=    0.0000032828
+ Iter  18:  RMS(Cart)=    0.0000007086 RMS(Int)=    0.0000031899
+ Iter  19:  RMS(Cart)=    0.0000006872 RMS(Int)=    0.0000030999
+ Iter  20:  RMS(Cart)=    0.0000006665 RMS(Int)=    0.0000030127
+ Iter  21:  RMS(Cart)=    0.0000006465 RMS(Int)=    0.0000029283
+ Iter  22:  RMS(Cart)=    0.0000006272 RMS(Int)=    0.0000028464
+ Iter  23:  RMS(Cart)=    0.0000006085 RMS(Int)=    0.0000027671
+ Iter  24:  RMS(Cart)=    0.0000005905 RMS(Int)=    0.0000026902
+ Iter  25:  RMS(Cart)=    0.0000005729 RMS(Int)=    0.0000026158
+ Iter  26:  RMS(Cart)=    0.0000005560 RMS(Int)=    0.0000025436
+ Iter  27:  RMS(Cart)=    0.0000005396 RMS(Int)=    0.0000024736
+ Iter  28:  RMS(Cart)=    0.0000005238 RMS(Int)=    0.0000024058
+ Iter  29:  RMS(Cart)=    0.0000005084 RMS(Int)=    0.0000023401
+ Iter  30:  RMS(Cart)=    0.0000004934 RMS(Int)=    0.0000022763
+ Iter  31:  RMS(Cart)=    0.0000004790 RMS(Int)=    0.0000022145
+ Iter  32:  RMS(Cart)=    0.0000004649 RMS(Int)=    0.0000021546
+ Iter  33:  RMS(Cart)=    0.0000004514 RMS(Int)=    0.0000020965
+ Iter  34:  RMS(Cart)=    0.0000004383 RMS(Int)=    0.0000020402
+ Iter  35:  RMS(Cart)=    0.0000004256 RMS(Int)=    0.0000019856
+ Iter  36:  RMS(Cart)=    0.0000004133 RMS(Int)=    0.0000019326
+ Iter  37:  RMS(Cart)=    0.0000004013 RMS(Int)=    0.0000018812
+ Iter  38:  RMS(Cart)=    0.0000003897 RMS(Int)=    0.0000018313
+ Iter  39:  RMS(Cart)=    0.0000003784 RMS(Int)=    0.0000017830
+ Iter  40:  RMS(Cart)=    0.0000003677 RMS(Int)=    0.0000017361
+ Iter  41:  RMS(Cart)=    0.0000003571 RMS(Int)=    0.0000016906
+ Iter  42:  RMS(Cart)=    0.0000003469 RMS(Int)=    0.0000016464
+ Iter  43:  RMS(Cart)=    0.0000003368 RMS(Int)=    0.0000016036
+ Iter  44:  RMS(Cart)=    0.0000003273 RMS(Int)=    0.0000015620
+ Iter  45:  RMS(Cart)=    0.0000003181 RMS(Int)=    0.0000015217
+ Iter  46:  RMS(Cart)=    0.0000003089 RMS(Int)=    0.0000014825
+ Iter  47:  RMS(Cart)=    0.0000003002 RMS(Int)=    0.0000014446
+ Iter  48:  RMS(Cart)=    0.0000002917 RMS(Int)=    0.0000014077
+ Iter  49:  RMS(Cart)=    0.0000002835 RMS(Int)=    0.0000013719
+ Iter  50:  RMS(Cart)=    0.0000002755 RMS(Int)=    0.0000013372
+ Iter  51:  RMS(Cart)=    0.0000002677 RMS(Int)=    0.0000013034
+ Iter  52:  RMS(Cart)=    0.0000002601 RMS(Int)=    0.0000012707
+ Iter  53:  RMS(Cart)=    0.0000002530 RMS(Int)=    0.0000012389
+ Iter  54:  RMS(Cart)=    0.0000002459 RMS(Int)=    0.0000012080
+ Iter  55:  RMS(Cart)=    0.0000002390 RMS(Int)=    0.0000011781
+ Iter  56:  RMS(Cart)=    0.0000002325 RMS(Int)=    0.0000011490
+ Iter  57:  RMS(Cart)=    0.0000002258 RMS(Int)=    0.0000011207
+ Iter  58:  RMS(Cart)=    0.0000002197 RMS(Int)=    0.0000010933
+ Iter  59:  RMS(Cart)=    0.0000002136 RMS(Int)=    0.0000010666
+ Iter  60:  RMS(Cart)=    0.0000002077 RMS(Int)=    0.0000010407
+ Iter  61:  RMS(Cart)=    0.0000002020 RMS(Int)=    0.0000010156
+ Iter  62:  RMS(Cart)=    0.0000001964 RMS(Int)=    0.0000009911
+CONVERGED
+Small eigenvalue found = 6.144e-03
+Small eigenvalue found = 1.284e-02
+Small eigenvalue found = 1.812e-02
+Small eigenvalue found = 2.969e-02
+The first mode is                       ....   91
+The number of degrees of freedom        ....   81
+Storing new coordinates                 .... done
+
+    -----------------------------------------------------------------
+                    Redundant Internal Coordinates
+
+
+    -----------------------------------------------------------------
+         Definition                    Initial Value    Approx d2E/dq
+    -----------------------------------------------------------------
+      1. B(C   1,C   0)                  1.5333         0.369027   
+      2. B(C   2,C   1)                  1.5471         0.350825   
+      3. B(C   3,C   2)                  1.5492         0.348147   
+      4. B(O   4,C   0)                  1.4668         0.422031   
+      5. B(O   4,C   3)                  1.4789         0.403699   
+      6. B(H   5,C   0)                  1.0919         0.357632   
+      7. B(H   6,C   1)                  1.0958         0.352561   
+      8. B(H   7,C   1)                  1.0951         0.353431   
+      9. B(H   8,C   2)                  1.0945         0.354166   
+     10. B(H   9,C   2)                  1.0966         0.351438   
+     11. B(H  10,C   3)                  1.0954         0.353010   
+     12. B(H  11,C   3)                  1.0939         0.354989   
+     13. B(H  13,C  12)                  1.0978         0.349888   
+     14. B(H  14,C  12)                  1.0978         0.349934   
+     15. B(O  15,C   0)                  1.5525         0.307993   
+     16. B(O  15,C  12)                  1.5538         0.306623   
+     17. B(C  16,C  12)                  1.5533         0.342895   
+     18. B(C  17,C  16)                  1.5322         0.370516   
+     19. B(C  18,C  17)                  1.5477         0.349993   
+     20. B(C  19,C  18)                  1.5500         0.347076   
+     21. B(O  20,C  16)                  1.4668         0.422024   
+     22. B(O  20,C  19)                  1.4783         0.404585   
+     23. B(H  21,C  16)                  1.0919         0.357659   
+     24. B(H  22,C  17)                  1.0956         0.352716   
+     25. B(O  23,C  17)                  1.5537         0.306726   
+     26. B(H  24,C  18)                  1.0945         0.354200   
+     27. B(H  25,C  18)                  1.0961         0.352185   
+     28. B(H  26,C  19)                  1.0957         0.352598   
+     29. B(H  27,C  19)                  1.0924         0.356915   
+     30. B(H  28,O  23)                  1.0955         0.316120   
+     31. A(O   4,C   0,H   5)          107.0228         0.328541   
+     32. A(C   1,C   0,O  15)          111.3008         0.348740   
+     33. A(C   1,C   0,O   4)          104.2481         0.367935   
+     34. A(O   4,C   0,O  15)          110.4738         0.354548   
+     35. A(C   1,C   0,H   5)          114.4368         0.323302   
+     36. A(H   5,C   0,O  15)          109.1587         0.312058   
+     37. A(C   0,C   1,C   2)          101.6799         0.358729   
+     38. A(C   2,C   1,H   7)          112.8315         0.320016   
+     39. A(C   2,C   1,H   6)          110.6711         0.319888   
+     40. A(C   0,C   1,H   6)          110.0675         0.322546   
+     41. A(H   6,C   1,H   7)          108.3682         0.289027   
+     42. A(C   0,C   1,H   7)          113.1242         0.322677   
+     43. A(C   1,C   2,H   8)          112.8320         0.320125   
+     44. A(C   1,C   2,C   3)          103.1262         0.355196   
+     45. A(C   1,C   2,H   9)          110.0802         0.319721   
+     46. A(C   3,C   2,H   9)          110.6153         0.319321   
+     47. A(C   3,C   2,H   8)          112.4040         0.319725   
+     48. A(H   8,C   2,H   9)          107.7727         0.288977   
+     49. A(O   4,C   3,H  10)          109.1297         0.325449   
+     50. A(C   2,C   3,H  10)          112.5253         0.319554   
+     51. A(C   2,C   3,O   4)          106.5279         0.361529   
+     52. A(O   4,C   3,H  11)          107.1236         0.325748   
+     53. A(H  10,C   3,H  11)          108.8728         0.289284   
+     54. A(C   2,C   3,H  11)          112.4565         0.319846   
+     55. A(C   0,O   4,C   3)          108.3151         0.371320   
+     56. A(H  14,C  12,C  16)          107.7275         0.318307   
+     57. A(H  13,C  12,H  14)          108.2102         0.288234   
+     58. A(H  13,C  12,O  15)          109.2305         0.310731   
+     59. A(H  14,C  12,O  15)          110.4743         0.310738   
+     60. A(O  15,C  12,C  16)          112.7263         0.344201   
+     61. A(H  13,C  12,C  16)          108.3480         0.318301   
+     62. A(C   0,O  15,C  12)          115.1639         0.336025   
+     63. A(C  12,C  16,C  17)          111.3107         0.357581   
+     64. A(C  12,C  16,O  20)          110.4359         0.363336   
+     65. A(C  17,C  16,O  20)          104.2340         0.368188   
+     66. A(C  12,C  16,H  21)          109.1201         0.319443   
+     67. A(C  17,C  16,H  21)          114.4980         0.323520   
+     68. A(O  20,C  16,H  21)          107.0408         0.328545   
+     69. A(C  16,C  17,C  18)          101.7276         0.358830   
+     70. A(C  16,C  17,H  22)          110.0994         0.322782   
+     71. A(C  18,C  17,H  22)          110.6467         0.319787   
+     72. A(C  16,C  17,O  23)          113.1560         0.348735   
+     73. A(C  18,C  17,O  23)          112.7870         0.345406   
+     74. A(H  22,C  17,O  23)          108.3312         0.311153   
+     75. A(C  17,C  18,C  19)          103.0540         0.354868   
+     76. A(C  17,C  18,H  24)          112.8033         0.320006   
+     77. A(C  19,C  18,H  24)          112.3861         0.319569   
+     78. A(C  17,C  18,H  25)          110.0469         0.319708   
+     79. A(C  19,C  18,H  25)          110.6618         0.319271   
+     80. A(H  24,C  18,H  25)          107.8712         0.289077   
+     81. A(C  18,C  19,O  20)          106.5170         0.361474   
+     82. A(C  18,C  19,H  26)          112.4568         0.319332   
+     83. A(O  20,C  19,H  26)          109.1472         0.325503   
+     84. A(C  18,C  19,H  27)          112.4536         0.319968   
+     85. A(O  20,C  19,H  27)          107.2208         0.326156   
+     86. A(H  26,C  19,H  27)          108.8504         0.289476   
+     87. A(C  16,O  20,C  19)          108.3614         0.371459   
+     88. A(C  17,O  23,H  28)          109.5894         0.303187   
+     89. D(H   7,C   1,C   0,H   5)     82.1513         0.010890   
+     90. D(C   2,C   1,C   0,O  15)     79.0863         0.010890   
+     91. D(H   7,C   1,C   0,O  15)    -42.1870         0.010890   
+     92. D(H   6,C   1,C   0,O   4)     77.3263         0.010890   
+     93. D(H   6,C   1,C   0,O  15)   -163.5729         0.010890   
+     94. D(H   6,C   1,C   0,H   5)    -39.2346         0.010890   
+     95. D(H   7,C   1,C   0,O   4)   -161.2879         0.010890   
+     96. D(C   2,C   1,C   0,O   4)    -40.0145         0.010890 C 
+     97. D(C   2,C   1,C   0,H   5)   -156.5754         0.010890   
+     98. D(H   9,C   2,C   1,H   6)    160.0776         0.009912   
+     99. D(H   8,C   2,C   1,C   0)    156.5478         0.009912   
+    100. D(H   8,C   2,C   1,H   6)     39.6445         0.009912   
+    101. D(C   3,C   2,C   1,C   0)     35.0270         0.009912 C 
+    102. D(H   8,C   2,C   1,H   7)    -81.9753         0.009912   
+    103. D(H   9,C   2,C   1,C   0)    -83.0190         0.009912   
+    104. D(C   3,C   2,C   1,H   6)    -81.8764         0.009912   
+    105. D(H   9,C   2,C   1,H   7)     38.4578         0.009912   
+    106. D(C   3,C   2,C   1,H   7)    156.5039         0.009912   
+    107. D(H  11,C   3,C   2,H   9)   -143.4628         0.009774   
+    108. D(O   4,C   3,C   2,H   8)   -140.0066         0.009774   
+    109. D(O   4,C   3,C   2,H   9)     99.4739         0.009774   
+    110. D(H  10,C   3,C   2,C   1)   -137.7433         0.009774   
+    111. D(H  10,C   3,C   2,H   8)    100.4468         0.009774   
+    112. D(H  10,C   3,C   2,H   9)    -20.0727         0.009774   
+    113. D(H  11,C   3,C   2,C   1)     98.8667         0.009774   
+    114. D(O   4,C   3,C   2,C   1)    -18.1967         0.009774 C 
+    115. D(H  11,C   3,C   2,H   8)    -22.9432         0.009774   
+    116. D(C   3,O   4,C   0,C   1)     29.5918         0.014035 C 
+    117. D(C   3,O   4,C   0,H   5)    151.2008         0.014035   
+    118. D(C   3,O   4,C   0,O  15)    -90.0696         0.014035   
+    119. D(C   0,O   4,C   3,C   2)     -6.8732         0.012866 C 
+    120. D(C   0,O   4,C   3,H  10)    114.8547         0.012866   
+    121. D(C   0,O   4,C   3,H  11)   -127.4273         0.012866   
+    122. D(C   0,O  15,C  12,C  16)    120.0000         0.007733 C 
+    123. D(C  12,O  15,C   0,O   4)     90.0000         0.007793 C 
+    124. D(C  12,O  15,C   0,H   5)   -152.5786         0.007793   
+    125. D(C   0,O  15,C  12,H  14)     -0.5818         0.007733   
+    126. D(C   0,O  15,C  12,H  13)   -119.4984         0.007733   
+    127. D(C  12,O  15,C   0,C   1)    -25.3124         0.007793   
+    128. D(C  17,C  16,C  12,H  13)    -56.2990         0.009506   
+    129. D(H  21,C  16,C  12,H  14)     59.5260         0.009506   
+    130. D(C  17,C  16,C  12,O  15)     64.7072         0.009506   
+    131. D(O  20,C  16,C  12,H  13)     58.9791         0.009506   
+    132. D(O  20,C  16,C  12,H  14)    -57.8720         0.009506   
+    133. D(O  20,C  16,C  12,O  15)    179.9853         0.009506 C 
+    134. D(C  17,C  16,C  12,H  14)   -173.1501         0.009506   
+    135. D(H  21,C  16,C  12,H  13)    176.3771         0.009506   
+    136. D(H  21,C  16,C  12,O  15)    -62.6167         0.009506   
+    137. D(C  18,C  17,C  16,C  12)     79.0352         0.010973   
+    138. D(C  18,C  17,C  16,O  20)    -40.0175         0.010973 C 
+    139. D(C  18,C  17,C  16,H  21)   -156.6226         0.010973   
+    140. D(H  22,C  17,C  16,C  12)   -163.6137         0.010973   
+    141. D(H  22,C  17,C  16,O  20)     77.3336         0.010973   
+    142. D(H  22,C  17,C  16,H  21)    -39.2715         0.010973   
+    143. D(O  23,C  17,C  16,C  12)    -42.2306         0.010973   
+    144. D(O  23,C  17,C  16,O  20)   -161.2833         0.010973   
+    145. D(O  23,C  17,C  16,H  21)     82.1116         0.010973   
+    146. D(H  24,C  18,C  17,O  23)    -81.9838         0.009869   
+    147. D(C  19,C  18,C  17,H  22)    -81.8989         0.009869   
+    148. D(C  19,C  18,C  17,O  23)    156.5781         0.009869   
+    149. D(H  24,C  18,C  17,C  16)    156.4940         0.009869   
+    150. D(C  19,C  18,C  17,C  16)     35.0559         0.009869 C 
+    151. D(H  24,C  18,C  17,H  22)     39.5392         0.009869   
+    152. D(H  25,C  18,C  17,C  16)    -82.9899         0.009869   
+    153. D(H  25,C  18,C  17,H  22)    160.0553         0.009869   
+    154. D(H  25,C  18,C  17,O  23)     38.5322         0.009869   
+    155. D(H  27,C  19,C  18,H  25)   -143.4395         0.009719   
+    156. D(O  20,C  19,C  18,H  24)   -139.9465         0.009719   
+    157. D(O  20,C  19,C  18,H  25)     99.3877         0.009719   
+    158. D(H  26,C  19,C  18,C  17)   -137.7477         0.009719   
+    159. D(H  26,C  19,C  18,H  24)    100.5318         0.009719   
+    160. D(H  26,C  19,C  18,H  25)    -20.1340         0.009719   
+    161. D(H  27,C  19,C  18,C  17)     98.9468         0.009719   
+    162. D(O  20,C  19,C  18,C  17)    -18.2260         0.009719 C 
+    163. D(H  27,C  19,C  18,H  24)    -22.7738         0.009719   
+    164. D(C  19,O  20,C  16,C  12)    -90.0831         0.014035   
+    165. D(C  19,O  20,C  16,C  17)     29.5628         0.014035 C 
+    166. D(C  19,O  20,C  16,H  21)    151.2440         0.014035   
+    167. D(C  16,O  20,C  19,C  18)     -6.8175         0.012921 C 
+    168. D(C  16,O  20,C  19,H  26)    114.8318         0.012921   
+    169. D(C  16,O  20,C  19,H  27)   -127.4135         0.012921   
+    170. D(H  28,O  23,C  17,C  16)     57.6488         0.007737   
+    171. D(H  28,O  23,C  17,C  18)    -57.1514         0.007737   
+    172. D(H  28,O  23,C  17,H  22)   -179.9771         0.007737   
+    -----------------------------------------------------------------
+
+Number of atoms                         .... 29
+Number of degrees of freedom            .... 172
+
+Time needed for optimization step       :     1.80 sec
+
+         *************************************************************
+         *                GEOMETRY OPTIMIZATION CYCLE   1            *
+         *************************************************************
+---------------------------------
+CARTESIAN COORDINATES (ANGSTROEM)
+---------------------------------
+  C    -21.048012   26.221893   46.251051
+  C    -20.361056   27.557899   45.943927
+  C    -20.329102   28.222064   47.340859
+  C    -20.110068   27.022164   48.295973
+  O    -20.473005   25.807080   47.535101
+  H    -20.832966   25.427861   45.533100
+  H    -19.344046   27.381897   45.575953
+  H    -20.898073   28.156804   45.200863
+  H    -19.543136   28.978107   47.433791
+  H    -21.289124   28.710049   47.547796
+  H    -20.733080   27.082226   49.194960
+  H    -19.064066   26.913236   48.596995
+  C    -23.060991   27.815898   46.783111
+  H    -23.613038   27.754833   47.730080
+  H    -22.199982   28.480866   46.930207
+  O    -22.586012   26.393918   46.375018
+  C    -23.985904   28.468020   45.719109
+  C    -25.298920   27.692074   45.571963
+  C    -26.098979   28.191995   46.798957
+  C    -25.658939   29.672970   46.924109
+  O    -24.403888   29.804996   46.154197
+  H    -23.427843   28.594080   44.789153
+  H    -25.801854   27.976170   44.640956
+  O    -25.100969   26.151068   45.569844
+  H    -27.180975   28.088041   46.670882
+  H    -25.810052   27.625910   47.691926
+  H    -25.475993   29.968876   47.963145
+  H    -26.382890   30.362031   46.483123
+  H    -24.599036   25.843974   46.493849
+
+----------------------------
+CARTESIAN COORDINATES (A.U.)
+----------------------------
+  NO LB      ZA    FRAG     MASS         X           Y           Z
+   0 C     6.0000    0    12.011  -39.774978   49.552196   87.401820
+   1 C     6.0000    0    12.011  -38.476819   52.076882   86.821440
+   2 C     6.0000    0    12.011  -38.416436   53.331973   89.461259
+   3 C     6.0000    0    12.011  -38.002520   51.064489   91.266163
+   4 O     8.0000    0    15.999  -38.688372   48.768313   89.828323
+   5 H     1.0000    0     1.008  -39.368601   48.051693   86.045089
+   6 H     1.0000    0     1.008  -36.554950   51.744287   86.126070
+   7 H     1.0000    0     1.008  -39.491635   53.208648   85.417252
+   8 H     1.0000    0     1.008  -36.931174   54.760687   89.636874
+   9 H     1.0000    0     1.008  -40.230614   54.254130   89.852314
+  10 H     1.0000    0     1.008  -39.179844   51.177990   92.965002
+  11 H     1.0000    0     1.008  -36.025864   50.858645   91.835012
+  12 C     6.0000    0    12.011  -43.578958   52.564430   88.407267
+  13 H     1.0000    0     1.008  -44.622174   52.449034   90.196779
+  14 H     1.0000    0     1.008  -41.951887   53.821036   88.685238
+  15 O     8.0000    0    15.999  -42.681376   49.877277   87.636084
+  16 C     6.0000    0    12.011  -45.326789   53.796761   86.396595
+  17 C     6.0000    0    12.011  -47.808030   52.330437   86.118529
+  18 C     6.0000    0    12.011  -49.319923   53.275150   88.437211
+  19 C     6.0000    0    12.011  -48.488368   56.073788   88.673715
+  20 O     8.0000    0    15.999  -46.116665   56.323279   87.218792
+  21 H     1.0000    0     1.008  -44.272207   54.034980   84.639234
+  22 H     1.0000    0     1.008  -48.758437   52.867299   84.359181
+  23 O     8.0000    0    15.999  -47.433958   49.418357   86.114526
+  24 H     1.0000    0     1.008  -51.364599   53.078705   88.195185
+  25 H     1.0000    0     1.008  -48.773930   52.205404   90.124679
+  26 H     1.0000    0     1.008  -48.142650   56.632969   90.637209
+  27 H     1.0000    0     1.008  -49.856437   57.375924   87.840372
+  28 H     1.0000    0     1.008  -46.485441   48.838033   87.860642
+
+--------------------------------
+INTERNAL COORDINATES (ANGSTROEM)
+--------------------------------
+ C      0   0   0     0.000000000000     0.00000000     0.00000000
+ C      1   0   0     1.533334275362     0.00000000     0.00000000
+ C      2   1   0     1.547103422529   101.67907390     0.00000000
+ C      3   2   1     1.549188819996   103.12737509    35.02687180
+ O      1   2   3     1.466801281701   104.24948604   319.98542309
+ H      1   2   3     1.091872245274   114.43876658   203.42640133
+ H      2   1   3     1.095759553917   110.06782188   117.34000099
+ H      2   1   3     1.095088580892   113.12442239   238.72597460
+ H      3   2   1     1.094523183857   112.83161078   156.54780790
+ H      3   2   1     1.096628013503   110.07982737   276.98070077
+ H      4   3   2     1.095413164062   112.52534669   222.25678475
+ H      4   3   2     1.093891219455   112.45670684    98.86663270
+ C     10   3   2     2.127074281731   118.31758963    34.02876955
+ H     13  10   3     1.097831498910    97.58470158   126.22229251
+ H     13  10   3     1.097795518300    17.03380296   256.13330255
+ O      1   2   3     1.552547583812   111.30349807    79.08752829
+ C     13  10   3     1.553327074379   124.47353283   244.68732466
+ C     17  13  10     1.532238232130   111.31081848   190.34909118
+ C     18  17  13     1.547749656760   101.72755150    79.03526294
+ C     19  18  17     1.550027741687   103.05405404    35.05592107
+ O     17  13  10     1.466805372229   110.43588937   305.62723443
+ H     17  13  10     1.091851638273   109.12000589    63.02510502
+ H     18  17  13     1.095639539265   110.09937149   196.38629642
+ O     18  17  13     1.553669527280   113.15604467   317.76940445
+ H     19  18  17     1.094497144811   112.80328958   156.49398623
+ H     19  18  17     1.096050181333   110.04688172   277.01007601
+ H     20  19  18     1.095730806357   112.45678932   222.25229164
+ H     20  19  18     1.092418418007   112.45364904    98.94677233
+ H     24  18  17     1.095458351559   109.58938893    57.64878499
+
+---------------------------
+INTERNAL COORDINATES (A.U.)
+---------------------------
+ C      0   0   0     0.000000000000     0.00000000     0.00000000
+ C      1   0   0     2.897581852189     0.00000000     0.00000000
+ C      2   1   0     2.923601769431   101.67907390     0.00000000
+ C      3   2   1     2.927542599525   103.12737509    35.02687180
+ O      1   2   3     2.771852715300   104.24948604   319.98542309
+ H      1   2   3     2.063339516798   114.43876658   203.42640133
+ H      2   1   3     2.070685465531   110.06782188   117.34000099
+ H      2   1   3     2.069417510270   113.12442239   238.72597460
+ H      3   2   1     2.068349064717   112.83161078   156.54780790
+ H      3   2   1     2.072326616307   110.07982737   276.98070077
+ H      4   3   2     2.070030883569   112.52534669   222.25678475
+ H      4   3   2     2.067154825070   112.45670684    98.86663270
+ C     10   3   2     4.019587858978   118.31758963    34.02876955
+ H     13  10   3     2.074600874133    97.58470158   126.22229251
+ H     13  10   3     2.074532880634    17.03380296   256.13330255
+ O      1   2   3     2.933889743286   111.30349807    79.08752829
+ C     13  10   3     2.935362766982   124.47353283   244.68732466
+ C     17  13  10     2.895510630649   111.31081848   190.34909118
+ C     18  17  13     2.924822975147   101.72755150    79.03526294
+ C     19  18  17     2.929127931769   103.05405404    35.05592107
+ O     17  13  10     2.771860445277   110.43588937   305.62723443
+ H     17  13  10     2.063300575210   109.12000589    63.02510502
+ H     18  17  13     2.070458670706   110.09937149   196.38629642
+ O     18  17  13     2.936009909179   113.15604467   317.76940445
+ H     19  18  17     2.068299858052   112.80328958   156.49398623
+ H     19  18  17     2.071234671754   110.04688172   277.01007601
+ H     20  19  18     2.070631140516   112.45678932   222.25229164
+ H     20  19  18     2.064371633684   112.45364904    98.94677233
+ H     24  18  17     2.070116275563   109.58938893    57.64878499
+
+---------------------
+BASIS SET INFORMATION
+---------------------
+There are 3 groups of distinct atoms
+
+ Group   1 Type C   : 10s4p contracted to 3s2p pattern {631/31}
+ Group   2 Type O   : 10s4p contracted to 3s2p pattern {631/31}
+ Group   3 Type H   : 4s contracted to 2s pattern {31}
+
+Atom   0C    basis set group =>   1
+Atom   1C    basis set group =>   1
+Atom   2C    basis set group =>   1
+Atom   3C    basis set group =>   1
+Atom   4O    basis set group =>   2
+Atom   5H    basis set group =>   3
+Atom   6H    basis set group =>   3
+Atom   7H    basis set group =>   3
+Atom   8H    basis set group =>   3
+Atom   9H    basis set group =>   3
+Atom  10H    basis set group =>   3
+Atom  11H    basis set group =>   3
+Atom  12C    basis set group =>   1
+Atom  13H    basis set group =>   3
+Atom  14H    basis set group =>   3
+Atom  15O    basis set group =>   2
+Atom  16C    basis set group =>   1
+Atom  17C    basis set group =>   1
+Atom  18C    basis set group =>   1
+Atom  19C    basis set group =>   1
+Atom  20O    basis set group =>   2
+Atom  21H    basis set group =>   3
+Atom  22H    basis set group =>   3
+Atom  23O    basis set group =>   2
+Atom  24H    basis set group =>   3
+Atom  25H    basis set group =>   3
+Atom  26H    basis set group =>   3
+Atom  27H    basis set group =>   3
+Atom  28H    basis set group =>   3
+------------------------------------------------------------------------------
+                           ORCA GTO INTEGRAL CALCULATION
+------------------------------------------------------------------------------
+
+                         BASIS SET STATISTICS AND STARTUP INFO
+
+ # of primitive gaussian shells          ...  246
+ # of primitive gaussian functions       ...  350
+ # of contracted shells                  ...   97
+ # of contracted basis functions         ...  149
+ Highest angular momentum                ...    1
+ Maximum contraction depth               ...    6
+ Integral package used                   ... LIBINT
+ Integral threshhold            Thresh   ...  2.500e-11
+ Primitive cut-off              TCut     ...  2.500e-12
+
+
+------------------------------ INTEGRAL EVALUATION ----------------------------
+
+
+ * One electron integrals 
+ Pre-screening matrix                    ... done
+ Shell pair data                         ... done (   0.003 sec)
+
+-------------------------------------------------------------------------------
+                                 ORCA SCF
+-------------------------------------------------------------------------------
+
+------------
+SCF SETTINGS
+------------
+Hamiltonian:
+ Density Functional     Method          .... DFT(GTOs)
+ Exchange Functional    Exchange        .... B88
+   X-Alpha parameter    XAlpha          ....  0.666667
+   Becke's b parameter  XBeta           ....  0.004200
+ Correlation Functional Correlation     .... LYP
+ LDA part of GGA corr.  LDAOpt          .... VWN-5
+ Gradients option       PostSCFGGA      .... off
+ Hybrid DFT is turned on
+   Fraction HF Exchange ScalHFX         ....  0.200000
+   Scaling of DF-GGA-X  ScalDFX         ....  0.720000
+   Scaling of DF-GGA-C  ScalDFC         ....  0.810000
+   Scaling of DF-LDA-C  ScalLDAC        ....  1.000000
+   Perturbative correction              ....  0.000000
+   Density functional embedding theory  .... OFF
+   NL short-range parameter             ....  4.800000
+
+
+General Settings:
+ Integral files         IntName         .... project_8051/ensemble_90_120
+ Hartree-Fock type      HFTyp           .... RHF
+ Total Charge           Charge          ....    0
+ Multiplicity           Mult            ....    1
+ Number of Electrons    NEL             ....  102
+ Basis Dimension        Dim             ....  149
+ Nuclear Repulsion      ENuc            ....    884.7389387606 Eh
+
+Convergence Acceleration:
+ DIIS                   CNVDIIS         .... on
+   Start iteration      DIISMaxIt       ....    12
+   Startup error        DIISStart       ....  0.200000
+   # of expansion vecs  DIISMaxEq       ....     5
+   Bias factor          DIISBfac        ....   1.050
+   Max. coefficient     DIISMaxC        ....  10.000
+ Newton-Raphson         CNVNR           .... off
+ SOSCF                  CNVSOSCF        .... on
+   Start iteration      SOSCFMaxIt      ....   150
+   Startup grad/error   SOSCFStart      ....  0.003300
+ Level Shifting         CNVShift        .... on
+   Level shift para.    LevelShift      ....    0.2500
+   Turn off err/grad.   ShiftErr        ....    0.0010
+ Zerner damping         CNVZerner       .... off
+ Static damping         CNVDamp         .... on
+   Fraction old density DampFac         ....    0.7000
+   Max. Damping (<1)    DampMax         ....    0.9800
+   Min. Damping (>=0)   DampMin         ....    0.0000
+   Turn off err/grad.   DampErr         ....    0.1000
+ Fernandez-Rico         CNVRico         .... off
+
+SCF Procedure:
+ Maximum # iterations   MaxIter         ....   125
+ SCF integral mode      SCFMode         .... Direct
+   Integral package                     .... LIBINT
+ Reset frequency        DirectResetFreq ....    20
+ Integral Threshold     Thresh          ....  2.500e-11 Eh
+ Primitive CutOff       TCut            ....  2.500e-12 Eh
+
+Convergence Tolerance:
+ Convergence Check Mode ConvCheckMode   .... Total+1el-Energy
+ Convergence forced     ConvForced      .... 0
+ Energy Change          TolE            ....  1.000e-08 Eh
+ 1-El. energy change                    ....  1.000e-05 Eh
+ Orbital Gradient       TolG            ....  1.000e-05
+ Orbital Rotation angle TolX            ....  1.000e-05
+ DIIS Error             TolErr          ....  5.000e-07
+
+
+Diagonalization of the overlap matrix:
+Smallest eigenvalue                        ... 3.596e-03
+Time for diagonalization                   ...    0.008 sec
+Threshold for overlap eigenvalues          ... 1.000e-08
+Number of eigenvalues below threshold      ... 0
+Time for construction of square roots      ...    0.216 sec
+Total time needed                          ...    0.224 sec
+
+-------------------
+DFT GRID GENERATION
+-------------------
+
+General Integration Accuracy     IntAcc      ...  4.340
+Radial Grid Type                 RadialGrid  ... Gauss-Chebyshev
+Angular Grid (max. acc.)         AngularGrid ... Lebedev-110
+Angular grid pruning method      GridPruning ... 3 (G Style)
+Weight generation scheme         WeightScheme... Becke
+Basis function cutoff            BFCut       ...    1.0000e-11
+Integration weight cutoff        WCut        ...    1.0000e-14
+Grids for H and He will be reduced by one unit
+
+# of grid points (after initial pruning)     ...  34472 (   0.0 sec)
+# of grid points (after weights+screening)   ...  30896 (   0.6 sec)
+nearest neighbour list constructed           ...    0.0 sec
+Grid point re-assignment to atoms done       ...    0.0 sec
+Grid point division into batches done        ...    0.0 sec
+Reduced shell lists constructed in    0.6 sec
+
+Total number of grid points                  ...    30896
+Total number of batches                      ...      495
+Average number of points per batch           ...       62
+Average number of grid points per atom       ...     1065
+Average number of shells per batch           ...    60.77 (62.65%)
+Average number of basis functions per batch  ...    98.35 (66.01%)
+Average number of large shells per batch     ...    42.95 (70.66%)
+Average number of large basis fcns per batch ...    70.96 (72.14%)
+Maximum spatial batch extension              ...  19.44, 20.09, 19.57 au
+Average spatial batch extension              ...   3.16,  3.49,  3.28 au
+
+Time for grid setup =    2.343 sec
+
+------------------------------
+INITIAL GUESS: MODEL POTENTIAL
+------------------------------
+Loading Hartree-Fock densities                     ... done
+Calculating cut-offs                               ... done
+Setting up the integral package                    ... done
+Initializing the effective Hamiltonian             ... done
+Starting the Coulomb interaction                   ... done (   0.6 sec)
+Reading the grid                                   ... done
+Mapping shells                                     ... done
+Starting the XC term evaluation                    ... done (   0.7 sec)
+  promolecular density results
+     # of electrons  =    102.008883550
+     EX              =    -83.708955683
+     EC              =     -3.468479334
+     EX+EC           =    -87.177435017
+Transforming the Hamiltonian                       ... done (   0.0 sec)
+Diagonalizing the Hamiltonian                      ... done (   0.0 sec)
+Back transforming the eigenvectors                 ... done (   0.0 sec)
+Now organizing SCF variables                       ... done
+                      ------------------
+                      INITIAL GUESS DONE (   3.8 sec)
+                      ------------------
+--------------
+SCF ITERATIONS
+--------------
+ITER       Energy         Delta-E        Max-DP      RMS-DP      [F,P]     Damp
+               ***  Starting incremental Fock matrix formation  ***
+
+ORCA finished by error termination in SCF
+Calling Command: orca_scf project_8051/ensemble_90_120.gbw b 
+[file orca_tools/qcmsg.cpp, line 458]: 
+  .... aborting the run
+

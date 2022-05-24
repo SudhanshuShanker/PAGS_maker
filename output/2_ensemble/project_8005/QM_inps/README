@@ -1,0 +1,5 @@
+Used torsion:   [[5, 1, 16, 13], [1, 16, 13, 17]]
+Used step size: 15
+Input pdb file: ./output/1_molecule_maker_pdbs/FNA2toFNA1W1_a300.pdb
+Orca exe:       /home/sudhanshu/bin/orca_4_2_0_linux_x86-64_openmpi314/orca
+Ensemble output:./output/2_ensemble/

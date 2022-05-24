@@ -166,10 +166,10 @@ This does not look like a perfect clustering as profiles for $\psi$ have subtle 
 
 a): For a linkage with an $\omega$ dihedral example, modify settings.py file and use the *global_settings.list_of_linkage_names* for $\omega$ example.  
 b): Running molecular_maker.py will generate 6 structures (for fixed $\omega$ values at 60$^o$, 180$^o$, and 300$^o$ (3) x O in axial or equtorial(2))  
-c): Ensemble will be generated for all six structures.
-d): qm calculation will be done similarly as given previously.
-e): QM_energy_extractor.py will generate new unscaled files for omega in directory ...
-f): Now running make_omega_potential.py will make files for $\omega$ potentials.
+c): Ensemble will be generated for all six structures.  
+d): qm calculation will be done similarly as given previously.  
+e): QM_energy_extractor.py will generate new unscaled files for omega in directory ...  
+f): Now running make_omega_potential.py will make files for $\omega$ potentials.  
 
 
 	

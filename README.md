@@ -17,9 +17,11 @@ $~$
 >> ./molecule_maker.py
 ```
 This step will generate a simplified pdb molecule in global_settings.simplified_pdb_output_dir (settings.py)  
+<p align="center">
+<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0.png" alt="drawing" width="250"/>
+</p>
 
-<img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0.png" alt="drawing" width="200"/>
-	
+
 $~$
 
 **Step2: Generate a rotational ensemble and QM input files**  

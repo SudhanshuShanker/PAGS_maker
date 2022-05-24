@@ -21,6 +21,7 @@ This step will generate a simplified pdb molecule in global_settings.simplified_
 <img src="https://github.com/SudhanshuShanker/PAGS_maker/blob/main/Extra/figures/FNA2toFNA3W0.png" alt="drawing" width="250"/>
 </p>
 
+<center> Simplified pdb file for linkage code FNA2toFNA3W0 </center>
 
 $~$
 

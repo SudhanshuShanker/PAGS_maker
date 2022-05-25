@@ -8,10 +8,9 @@ Created on Wed Jan 13 21:56:06 2021
 from src.read_and_fit_from_data_file import (
     read_runconfig_file_and_make_phi_psi_histfiles, 
     read_runconfig_file_and_make_phi_psi_histfiles_no_norm)
-import sys
+
 import os
 from settings import global_settings
-sys.path.insert(1, '/home/sudhanshu/bin/my_scripts/my_python_tools')
 
 
 

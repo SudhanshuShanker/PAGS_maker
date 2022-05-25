@@ -1,0 +1,7 @@
+# PAGS Parameters for linkID FNA2toFNA1W1_a_om1
+LINKID  s?5nA1_s?5nA2_A1_OM1  # Linkage Name
+FUNCTION    SQUARE     # the type of equation GAUSSIAN: gaussian, and SQUARE: quadratic
+a     0.79    # Minima for 60 Degree
+b     0.00    # Minima for 180 Degree
+c     1.87    # Minima for 300 Degree
+d     0.00    # Unused value

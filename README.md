@@ -180,6 +180,16 @@ c): Rotational ensemble (for $\phi$ and $\psi$) will be generated for all six st
 d): QM calculation will be done similarly as given previously.  
 e): QM_energy_extractor.py will generate new unscaled files for omega in directory ...  
 f): Now running make_omega_potential.py will make files for $\omega$ potentials.  
+
+	>------------------------------------------
+	Omega params file for FNA2toFNA1W1_a linkage save in ./output/3_histograms/params/
+	params file name: FNA2toFNA1W1_a_om1.params
+	------------------------------------------!
+	>------------------------------------------
+	Omega params file for FNA2toFNA1W1_e linkage save in ./output/3_histograms/params/
+	params file name: FNA2toFNA1W1_e_om1.params
+	------------------------------------------!
+
 e): If required, clustering steps will be similar.  
 
 **EXAMPLE FILES FOR BOTH WITH AND WITHOUT $\omega$ CASES ARE GIVEN IN "EXTRA" DIRCTORY.**  

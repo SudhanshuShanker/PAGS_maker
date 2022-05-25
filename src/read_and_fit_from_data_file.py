@@ -184,3 +184,22 @@ def read_runconfig_file_and_make_phi_psi_histfiles_no_norm(file, out_dir="./"):
     gg = extract_multidimentional_data(file, 2,0,nomalize)
    
     gg.make_exphist_data(out_dir+pdb_input_name+"_NoNorm_psi.exphist")
+
+
+def exphist_file_read( data_p,two_col=0):
+    data= open(data_p,"r").readlines() 
+    all_data=[]
+    for i in data:
+        d = i.split()
+        all_data.append(d)     
+    all_data=np.array(all_data).astype(float)
+    if all_data.shape[1]==1:
+        x = np.array(range(len(all_data[:,0])))*15
+    else:
+        x = all_data[:,0]
+        
+    data_np = all_data[:,-1]*627.509    
+    #data_np = data_np - np.min(data_np)   
+    y = data_np 
+
+    return x,y     

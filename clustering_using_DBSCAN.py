@@ -93,21 +93,40 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
     rows = 4
     if phi_or_psi_out == "PHI":  #setting is loading PHI files
         handle.phi_treat = 1  # as phi ranges from -180 to 180
+        
+        # handle.phi_treat = 1  # as phi ranges from -180 to 180
+        # cut_off = 8 # ignore high energy values more than
+        # eps_v = 2.   # for DBSCAN
+        # columns = 5
+        # rows = 1
+        # xticks = (range(-180,181,120)) # as phi ranges from -180 to 180
+        # yticks = (range(0,15,2))
+        # fig_size = (12,3)
+        
+        # cut_off = 10 # ignore high energy values more than
+        # eps_v = 2.2   # for DBSCAN
+        # columns = 7
+        # rows = 18
+        # xticks = (range(-180,181,120)) # as phi ranges from -180 to 180
+        # yticks = (range(0,15,2))
+        # fig_size = (12,36)
+        
         cut_off = 8 # ignore high energy values more than
-        eps_v = 2.   # for DBSCAN
+        eps_v = 1.8  # for DBSCAN
         columns = 5
-        rows = 1
+        rows = 2
         xticks = (range(-180,181,120)) # as phi ranges from -180 to 180
         yticks = (range(0,15,2))
-        fig_size = (12,3)
+        fig_size = (12,6)
+        
     else:                       #setting is loading PSI files
         handle.phi_treat = 0
-        cut_off = 2.  # ignore high energy values more than
-        eps_v = .4 # for DBSCAN
+        cut_off = 4.  # ignore high energy values more than
+        eps_v = 1.2 # for DBSCAN
         rows = 3
         columns = 5
         yticks = (range(0,9,2))
-        fig_size = (12,12)
+        fig_size = (12,9)
 
   
     # reading param files from directory 
@@ -140,28 +159,29 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
     
     
     manual_clusters = clustering.labels_[:]
-    if phi_or_psi_out == 'PSI':
-        manual_clusters = join_clusters(manual_clusters,17,26) # visually identified
-        manual_clusters = join_clusters(manual_clusters,15,21) 
-        manual_clusters = join_clusters(manual_clusters,21,26) 
-        manual_clusters = join_clusters(manual_clusters,20,25) 
-        manual_clusters = join_clusters(manual_clusters,10,16)
-        manual_clusters = join_clusters(manual_clusters,2,21)
-        manual_clusters = join_clusters(manual_clusters,15,18)
-        manual_clusters = join_clusters(manual_clusters,10,13)
-        manual_clusters = join_clusters(manual_clusters,17,16)
-        manual_clusters = join_clusters(manual_clusters,3,19)
-        manual_clusters = join_clusters(manual_clusters,2,19)
-        manual_clusters = join_clusters(manual_clusters,1,6)
-        manual_clusters = join_clusters(manual_clusters,1,17)
-        manual_clusters = join_clusters(manual_clusters,10,15)
-        manual_clusters = join_clusters(manual_clusters,0,15)
+    #if phi_or_psi_out == 'PSI':
+     #   manual_clusters = join_clusters(manual_clusters,0,26) # visually identified
+    #     manual_clusters = join_clusters(manual_clusters,15,21) 
+    #     manual_clusters = join_clusters(manual_clusters,21,26) 
+    #     manual_clusters = join_clusters(manual_clusters,20,25) 
+    #     manual_clusters = join_clusters(manual_clusters,10,16)
+    #     manual_clusters = join_clusters(manual_clusters,2,21)
+    #     manual_clusters = join_clusters(manual_clusters,15,18)
+    #     manual_clusters = join_clusters(manual_clusters,10,13)
+    #     manual_clusters = join_clusters(manual_clusters,17,16)
+    #     manual_clusters = join_clusters(manual_clusters,3,19)
+    #     manual_clusters = join_clusters(manual_clusters,2,19)
+    #     manual_clusters = join_clusters(manual_clusters,1,6)
+    #     manual_clusters = join_clusters(manual_clusters,1,17)
+    #     manual_clusters = join_clusters(manual_clusters,10,15)
+    #     manual_clusters = join_clusters(manual_clusters,0,15)
        
     # calculating mean profiles and names of linkages in each cluster
     cluster_files =dict()
     cluster_links = dict()
     mean_profs = dict()
     number_of_clusters = np.max(manual_clusters)+1  
+    print(number_of_clusters)
     for i in range(number_of_clusters):              
         
         curr_files = []  # for files of same clusters        
@@ -233,9 +253,16 @@ def main(phi_or_psi_out, in_file_dir, out_file_dir):
    
 
 if __name__ == '__main__':
-    phi_or_psi_out = "PSI"
+    phi_or_psi_out = "PHI"
     in_file_dir = "./bin/parameter_files/Pyranose_Furanose_W0/"    
     out_file_dir = "./bin/parameter_files/Pyranose_Furanose_W0/clustered_pots/"    
+    
+    main_dir = "/home/sudhanshu/HDD3/pipeline_output_and_mount_jazz_local/histogram_and_potential_files/ALL_params/"
+    in_file_dir = main_dir + "all_phi/W1/"
+    out_file_dir = main_dir + "phi_params_temp/"
+    in_file_dir = "/home/sudhanshu/Desktop/projects/pipeline/2022/output2/3_histograms/params/"
+    out_file_dir = in_file_dir +"temp/"
+    
     
     print ("Making mean exphistogram files for", phi_or_psi_out,".")
     print (".params files from directory", in_file_dir, "are used." )

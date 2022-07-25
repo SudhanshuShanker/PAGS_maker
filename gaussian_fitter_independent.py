@@ -43,6 +43,7 @@ class fit_with_gaussian_file_data:
         self.back_dir = "./.data_parameters"
         self.param_dir = "./params/"
         self.dir = ""
+        self.link_name =""
         
         self.ss_plot = ss_plot
         if not ss_exist(self.back_dir,"dir"):
@@ -50,7 +51,7 @@ class fit_with_gaussian_file_data:
         
         if not ss_exist(self.param_dir,"dir"):
             os.mkdir(self.param_dir)
-        
+        self.in_file = in_file
         self.parameter_file_init = in_file.split("/")[-1].replace(".runconfig","")+"_"+str(self.gaus_num)+"_"  
         self.out_file_name = (self.param_dir + self.parameter_file_init[:-2] + "g" + self.parameter_file_init[-2:-1] + ".params").replace(".exphist","")      
         self.data_file_read(in_file)
@@ -76,7 +77,16 @@ class fit_with_gaussian_file_data:
         data_np = data_np - np.min(data_np)   
         self.y = data_np           
 
-        
+        #possible link name file:
+        link_name_file = self.in_file.replace("exphist","links")        
+        if os.path.exists(link_name_file):
+            fid = open(link_name_file,"r")
+            data = fid.readline()
+            fid.close()
+            
+            self.link_name = data
+
+
         
         #return(x,data_np)
         return ("X and Y initiated")
@@ -195,8 +205,9 @@ class fit_with_gaussian_file_data:
                 y2 = curr_gaus(x2,*popt)
                 
                 if self.ss_plot == 1:
-                    plt.plot(x2,y2,'r-',label='fit')
                     plt.plot(x,y,'b+:',label='data') 
+                    plt.plot(x2,y2,'r-',label='fit')
+                    
                     plt.legend()
                     plt.title('Fig. Fit for best MSE with'+ str(start_v))
                     plt.xlabel('Angle (°)')
@@ -220,10 +231,18 @@ class fit_with_gaussian_file_data:
                     aa_ = self.e_handle(aa_) + "# magnitudes of the distributions"
                     bb_ = self.e_handle(bb_) + "# midpoints of the distributions"
                     cc_ = self.e_handle(cc_) + "# twice the squares of the widths of the distributions"                    
+                    
+                    if self.link_name == "":
+                        use_link_name = "LINKID  " + link_name_converter(self.out_file_name.split("/")[-1])
+                    else:
+                        use_link_name = self.link_name
+                        
+                    
+                    
                     if self.write_to_file == 0:
                         print("# PAGS Parameters.")
                         print("FUNCTION  GAUSSIAN")
-                        print("LINKID ", link_name_converter(self.out_file_name.split("/")[-1]))
+                        print(use_link_name)
                         print("a    "+ aa_)
                         print("b    "+ bb_)
                         print("c    "+ cc_)
@@ -233,9 +252,9 @@ class fit_with_gaussian_file_data:
                     else:
                         fid_out = open(self.out_file_name, "w+")
                         fid_out.write("# PAGS Parameters for linkage "+
-                                      self.out_file_name.split("/")[-1].replace(".params","")[:-3]+ "\n")
+                                      use_link_name+ "\n")
                         fid_out.write("FUNCTION  GAUSSIAN"+ "\n")
-                        fid_out.write("LINKID "+ link_name_converter(self.out_file_name.split("/")[-1])+ "\n")
+                        fid_out.write( use_link_name+ "\n")
                         fid_out.write("a    "+ aa_ + "\n")
                         fid_out.write("b    "+ bb_ + "\n")
                         fid_out.write("c    "+ cc_ + "\n")
@@ -353,6 +372,7 @@ class fit_with_gaussian_file_data:
         #print ("Best R-square for " + str(gaus_number) + " gausian equation is " +
          #      ("%6.4f" % max_rsq) + ", start_point_v: " + str(val_max_rsq))
         
+    
         
     
     def plt_prop(self):

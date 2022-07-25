@@ -191,23 +191,26 @@ def compare_with_profiles2(input_prof,  base_profiles , cut_off = 4.):
     
 def link_name_converter(link_name):
     if link_name.endswith(".params"):
+        link_name = link_name.replace("?","$")
         vals=link_name.replace(".params","")[:-3].split("_")        
         phi_psi = vals[1].upper()
         A_or_E = ""
-        if ( ( phi_psi == "E" ) or ( phi_psi == "A")):
+        if ( ( phi_psi == "E" ) or ( phi_psi == "A") or ( phi_psi == "$")):
             A_or_E = phi_psi
             phi_psi = vals[2].upper()
             
         omega = vals[0][-2:]+A_or_E
         vals = vals[0][:-2]
         vals = vals.replace("P", "6c").replace("FN", "5n").replace("FS", "5s")
+        #vals = vals.replace("F", "5$")
         
         vals= vals.split('to')
         v1 = vals[1]
         v2 = vals[0]
         v1 = v1.replace("P","6c")
         vals = "s?"+v1+"_s?" + v2 + "_" +omega.replace("W","") + "_" +phi_psi
-        return vals
+        
+        return vals.replace("$","?")
     else:        
         vals = link_name.split("_")
         

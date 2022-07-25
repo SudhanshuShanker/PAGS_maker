@@ -25,10 +25,11 @@ global_settings.AMBERSETTINGS.temp_dir = "./temp/"
 #for molecule maker
 global_settings.list_of_linkage_names = "./bin/model_lists/list_example" #for linkage without omega
 #global_settings.list_of_linkage_names = "./bin/model_lists/list_example_with_omega" #for linkage with omega
-global_settings.simplified_pdb_output_dir = "./output/1_molecule_maker_pdbs/"
+global_settings.list_of_linkage_names = "./bin/model_lists/list_all_with_W1"
+global_settings.simplified_pdb_output_dir = "./output2/1_molecule_maker_pdbs/"
 
 #for ensemble making and input file generation
-global_settings.output_ensemble_dir = "./output/2_ensemble/"
+global_settings.output_ensemble_dir = "./output2/2_ensemble/"
 global_settings.dihedral_rotation_step_size = 15  # for serious calculations make it 10 or 15
 
 
@@ -41,6 +42,8 @@ global_settings.QM_out_dir_file_name = "condor.out_0"
         
 
 #For making Histogram Files in kcal/mol
-global_settings.QM_histogram_file_out_dir = "./output/3_histograms/"
+global_settings.QM_histogram_file_out_dir = "./output2/3_histograms/"
 
 
+
+    

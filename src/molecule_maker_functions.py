@@ -108,10 +108,28 @@ def pdb_component_data(connection_data):
 
 
 def connection_decoder(connect_str):
+ 
+    #path fpr P => P4
+    if connect_str.count('P') == 1:
+        if connect_str.count('P1') +  connect_str.count('P4') == 0:
+            connect_str = connect_str.replace('P','P4')
+            
+    elif connect_str.count('P') == 2:
+        if connect_str.count('P1') +  connect_str.count('P4') == 0:
+            connect_str = connect_str.replace('P','P4')
+        elif connect_str.count('P1') +  connect_str.count('P4') == 1:
+            print("problem with the name P4,P1,and P combination is wrong!")
+            return 0
+            
+      
+    print(connect_str)
+    
     data = connect_str.replace("to",'')
     out_d = [data[i] for i in range(len(data)) ]
 
+
     expand_dict = dict()
+    #expand_dict['P'] = 'PYRANOSE_4C1'
     expand_dict['P1'] = 'PYRANOSE_1C4'
     expand_dict['P4'] = 'PYRANOSE_4C1'
     expand_dict['FN'] = 'FURANOSE_NORTH'
@@ -166,7 +184,7 @@ def connection_decoder(connect_str):
     if ( out_x.count('NAME_ERROR') > 0 ): # stage 3
         output.status = False
         output._stage_ = 3
-        
+        print("NAME_ERROR")
         return output
        
     first_carbon = "C"+out_x[2]

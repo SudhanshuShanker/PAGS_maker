@@ -38,7 +38,7 @@ def read_energies(dirnm):
             dir_interest.append(i)
     all_data = []
     for i in dir_interest:
-        d=subprocess.Popen(["grep","FINAL" , dirnm +"/" + i+  "/" + 
+        d=subprocess.Popen(["grep","-a","FINAL" , dirnm +"/" + i+  "/" + 
                             global_settings.QM_out_dir_file_name, ]
                            ,stdout=subprocess.PIPE)
         dd = d.communicate()[0]

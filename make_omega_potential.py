@@ -83,7 +83,9 @@ def estimate_omega_minima_for_all_linkages(omega_dir, param_out_dir):
             
 if __name__ == "__main__":
     omega_dir = global_settings.QM_histogram_file_out_dir + "/for_omega/"
+    #omega_dir = "/home/sudhanshu/HDD3/pipeline_output_and_mount_jazz_local/histogram_and_potential_files/ALL_params/for_omega/"
     out_dir = global_settings.QM_histogram_file_out_dir + "params/"    
+    #out_dir = "/home/sudhanshu/HDD3/pipeline_output_and_mount_jazz_local/histogram_and_potential_files/ALL_params/params/"
     estimate_omega_minima_for_all_linkages(omega_dir,out_dir)
     
             
